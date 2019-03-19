@@ -1,0 +1,7 @@
+[user]
+	name = Michael Vilim
+	email = michael.vilim@gmail.com
+[core]
+	editor = nvim
+[push]
+	followTags = true

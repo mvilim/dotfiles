@@ -1,0 +1,239 @@
+# colors
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $darkgreen   #98971a
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+set $background  #000000
+set $transparent #00000000
+
+# override the border color be grey instead of blue
+# class                 border  backgr. text    indicator child_border
+client.focused          #333333 #999999 #ffffff #999999   #707070
+client.focused_inactive #606060 #383838 #ffffff #999999   #383838
+client.unfocused        #171717 #111111 #888888 #999999   #171717
+# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+bar {
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}
+
+# disable the basic mod button because we are going to do everything modally
+# Windows button
+set $mod Mod3
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# font pango:Helvetica Neue, FontAwesome 11
+font pango:Hack 11
+ 
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# disabled because this method of binding does not seem to work
+# directly bind the l+r windows keys to modes
+bindcode 133 mode "modal"
+bindcode 134 mode "modal"
+
+focus_follows_mouse no
+# because new windows don't open immediately, stealing the focus after we've started to do something else can be annoying
+# it would be better if we could connect our action to the operation based on a timer and decide focus based on that
+no_focus [tiling]
+# we don't want to focus on every urgent window
+# for_window [urgent="latest"] focus
+# but we do want to focus windows that request focus regardless of the workspace -- for example, if we click a link.
+# again, we run into the issue where autofocus is only disliked if there is a DELAY on the new window opening
+focus_on_window_activation focus
+
+# trying to cause applications to workspaces causes some problems
+#assign [class="Chromium"] 1
+#assign [class="jetbrains-idea"] 3
+#assign [class="Spotify"] 5
+
+exec_always ~/.fehbg
+
+mode "modal" {
+    bindsym Escape mode "default"
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+
+    bindsym v split v
+    bindsym c split h
+    bindsym p focus parent
+    bindsym o focus child
+    bindsym d exec rofi -m -4 -modi drun -show drun
+    bindsym w exec rofi -show window
+
+    bindsym s layout stacking
+    bindsym t layout tabbed
+    bindsym e layout toggle split
+
+    bindsym Shift+v layout splitv
+    bindsym Shift+c layout splith
+
+    bindsym 0 workspace 0
+    bindsym 1 workspace 1
+    bindsym 2 workspace 2
+    bindsym 3 workspace 3
+    bindsym 4 workspace 4
+    bindsym 5 workspace 5
+    bindsym 6 workspace 6
+    bindsym 7 workspace 7
+    bindsym 8 workspace 8
+    bindsym 9 workspace 9
+    bindsym Control+0 workspace 10
+    bindsym Control+1 workspace 11
+    bindsym Control+2 workspace 12
+    bindsym Control+3 workspace 13
+    bindsym Control+4 workspace 14
+    bindsym Control+5 workspace 15
+    bindsym Control+6 workspace 16
+    bindsym Control+7 workspace 17
+    bindsym Control+8 workspace 18
+    bindsym Control+9 workspace 19
+
+    # bindsym Return exec konsole
+    bindsym Return exec urxvt
+    bindsym q kill
+
+    # toggle tiling / floating
+    bindsym Shift+f floating toggle
+
+    # change focus between tiling / floating windows
+    bindsym f focus mode_toggle
+    # why does this need a sleep delay? I don't know
+    bindsym z exec --no-startup-id "zsh -c 'i3-msg mode default; sleep 0.2; loginctl lock-session'"
+
+    bindsym b workspace back_and_forth
+
+    bindsym d exec dmenu_run
+    bindcode 133 mode "move"
+    bindcode 134 mode "move"
+    bindsym r mode "resize"
+    bindsym Shift+r reload
+    bindsym Shift+Ctrl+r restart
+}
+
+mode "move" {
+    bindsym Escape mode "modal"
+    bindsym h move left
+    bindsym j move down
+    bindsym k move up
+    bindsym l move right
+
+    bindsym v layout splitv
+    bindsym c layout splith
+
+    bindsym Shift+h move workspace to output left
+    bindsym Shift+j move workspace to output down
+    bindsym Shift+k move workspace to output up
+    bindsym Shift+l move workspace to output right
+
+    bindsym 0 move container to workspace 0
+    bindsym 1 move container to workspace 1
+    bindsym 2 move container to workspace 2
+    bindsym 3 move container to workspace 3
+    bindsym 4 move container to workspace 4
+    bindsym 5 move container to workspace 5
+    bindsym 6 move container to workspace 6
+    bindsym 7 move container to workspace 7
+    bindsym 8 move container to workspace 8
+    bindsym 9 move container to workspace 9
+    bindsym Control+0 move container to workspace 10
+    bindsym Control+1 move container to workspace 11
+    bindsym Control+2 move container to workspace 12
+    bindsym Control+3 move container to workspace 13
+    bindsym Control+4 move container to workspace 14
+    bindsym Control+5 move container to workspace 15
+    bindsym Control+6 move container to workspace 16
+    bindsym Control+7 move container to workspace 17
+    bindsym Control+8 move container to workspace 18
+    bindsym Control+9 move container to workspace 19
+}
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 100 px or 5 ppt
+        bindsym j resize grow height 100 px or 5 ppt
+        bindsym k resize shrink height 100 px or 5 ppt
+        bindsym l resize grow width 100 px or 5 ppt
+
+        bindsym Control+h resize shrink width 20 px or 1 ppt
+        bindsym Control+j resize grow height 20 px or 1 ppt
+        bindsym Control+k resize shrink height 20 px or 1 ppt
+        bindsym Control+l resize grow width 20 px or 1 ppt
+
+        bindsym Escape mode "Modal"
+}
+
+# workspace default monitors
+workspace 0 output DP-4
+workspace 1 output DVI-D-0
+workspace 2 output DP-4
+workspace 3 output DVI-D-0
+workspace 4 output DP-4
+workspace 5 output DVI-D-0
+workspace 6 output DP-4
+workspace 7 output DVI-D-0
+workspace 8 output DP-4
+workspace 9 output DVI-D-0
+workspace 10 output DP-4
+workspace 11 output DVI-D-0
+workspace 12 output DP-4
+workspace 13 output DVI-D-0
+workspace 14 output DP-4
+workspace 15 output DVI-D-0
+workspace 16 output DP-4
+workspace 17 output DVI-D-0
+workspace 18 output DP-4
+workspace 19 output DVI-D-0
+
+# Starting things with i3
+for_window [class="yakuake"] floating enable;
+
+## Plasma Integration
+# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everythiing)
+exec --no-startup-id wmctrl -c Plasma
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+
+## Avoid tiling popups, dropdown windows from plasma
+# for the first time, manually resize them, i3 will remember the setting for floating windows
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none

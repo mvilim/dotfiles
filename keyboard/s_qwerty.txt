@@ -1,0 +1,33 @@
+* move caps somewhere else
+[caps]>[hyphen]
+[kp-caps]>[']
+
+[lshift]>[obrack]
+[kp-lshift]>[cbrack]
+[rwin]>[bspace]
+
+* configure our modifiers
+[bspace]>[lshift]
+[delete]>[kpshift]
+[kp-delete]>[kpshift]
+*[lctrl]>[lctrl]
+[home]>[lalt]
+
+* mirroring
+[kp-z]>[/]
+[kp-x]>[.]
+[kp-s]>[l]
+[kp-w]>[o]
+[kp-d]>[k]
+[kp-3]>[8]
+[kp-left]>[down]
+
+[kp-4]>[7]
+[kp-r]>[u]
+[kp-f]>[j]
+[kp-v]>[m]
+[kp-right]>[up]
+[kp-5]>[6]
+[kp-t]>[y]
+[kp-g]>[h]
+[kp-b]>[n]

@@ -1,0 +1,8 @@
+startup_file=a_qwerty.txt
+thumb_mode=PC
+key_click_tone=OFF
+toggle_tone=OFF
+macro_disable=OFF
+macro_speed=6
+power_user=true
+

@@ -1,0 +1,4 @@
+source ~/.vimrc
+" make sure our :noh binding does not carry over (ideavim doesn't read it as a
+" command and prints characters into the buffer)
+nmap <esc> <esc>
