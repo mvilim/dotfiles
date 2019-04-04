@@ -24,6 +24,7 @@ Plugin 'rhysd/vim-clang-format'
 Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'vimwiki/vimwiki'
+Plugin 'itchyny/calendar.vim'
 
 " Note for YouCompleteMe -- can break when python version is updated -- should
 " simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py 
@@ -104,6 +105,9 @@ set lbr
 " Allow cursor to go beyond EOL
 set virtualedit=onemore
 nnoremap $ $l
+
+" Set line under cursor
+set cursorline
 
 " case insensitive on lowercase
 set ignorecase
@@ -204,6 +208,12 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+
+" alt-nav keys
+noremap <A-j> gj
+noremap <A-k> gk
+noremap <A-h> gh
+noremap <A-l> gl
 
 " gutter mappings
 nnoremap <silent> <leader>gn :GitGutterNextHunk<CR>
