@@ -25,6 +25,7 @@ Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'vimwiki/vimwiki'
 Plugin 'itchyny/calendar.vim'
+Plugin 'fidian/hexmode'
 
 " Note for YouCompleteMe -- can break when python version is updated -- should
 " simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py 
@@ -94,7 +95,7 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 set smartindent
-set cindent    
+set cindent
 " Indents word-wrapped lines as much as the 'parent' line
 set breakindent
 set breakindentopt=shift:4
@@ -116,7 +117,7 @@ set smartcase
 " status line
 set laststatus=2
 set statusline=%f
-" allow hidden buffers 
+" allow hidden buffers
 set hidden
 
 " leader key mappings
@@ -132,6 +133,12 @@ set scrolloff=5
 
 " disable highlighting on escape in nvim (for use after search)
 nnoremap <esc> :noh<return><esc>
+
+" highlight extra whitespace
+highlight ExtraWhitespace ctermbg=238
+match ExtraWhitespace /\s\+\%#\@<!$/
+"Remove all trailing whitespace by pressing F5
+nnoremap <leader>cw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " custom colors
 hi MatchParen ctermbg=black ctermfg=white
@@ -183,7 +190,7 @@ nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
 
 " use fd as fzf find command
-let $FZF_DEFAULT_COMMAND = "fd --type f" 
+let $FZF_DEFAULT_COMMAND = "fd --type f"
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
@@ -234,3 +241,9 @@ hi Folded ctermbg=23
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
                   \ '.mkd': 'markdown',
                   \ '.wiki': 'media'}
+
+" fold config
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
