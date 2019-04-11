@@ -118,6 +118,10 @@ nnoremap $ $l
 
 " Set line under cursor
 set cursorline
+hi CursorLine term=underline cterm=NONE gui=NONE ctermbg=236
+
+" Warn on search wrap
+hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 " case insensitive on lowercase
 set ignorecase
