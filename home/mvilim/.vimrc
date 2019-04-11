@@ -78,6 +78,11 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 set tags=./tags;
 
+" vebugger settings
+let g:vebugger_leader='<space>d'
+nnoremap <space>ddi :VBGrawWrite info locals<enter>
+nnoremap <space>ddb :VBGrawWrite backtrace<enter>
+
 " Remove delay for key code timeouts
 set timeoutlen=10000 ttimeoutlen=0
 
