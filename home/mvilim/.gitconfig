@@ -3,5 +3,6 @@
 	email = michael.vilim@gmail.com
 [core]
 	editor = nvim
+	pager = less -FR
 [push]
 	followTags = true
