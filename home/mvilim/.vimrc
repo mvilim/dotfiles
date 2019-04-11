@@ -9,23 +9,27 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-"
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+
+" cpp development
 Plugin 'lyuts/vim-rtags'
-Plugin 'junegunn/fzf.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rhysd/vim-clang-format'
-Plugin 'lukhio/vim-mapping-conflicts'
-Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'idanarye/vim-vebugger'
+
+" productivity
 Plugin 'vimwiki/vimwiki'
 Plugin 'itchyny/calendar.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'junegunn/fzf.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'fidian/hexmode'
+
+" vim specific
+Plugin 'lukhio/vim-mapping-conflicts'
+Plugin 'itchyny/lightline.vim'
 
 " Note for YouCompleteMe -- can break when python version is updated -- should
 " simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py 
