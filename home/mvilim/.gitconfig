@@ -6,3 +6,27 @@
 	pager = less -FR
 [push]
 	followTags = true
+	default = simple
+[alias]
+	co = checkout
+	br = branch -vv
+	st = status
+	a = add
+	au = add -u
+	ad = add .
+	c = commit
+	cm = commit -m
+    ca = commit --amend
+	cp = cherry-pick
+	d = diff
+    pl = pull
+    ps = push
+    rs = reset
+    rb = rebase
+    rbi = rebase -i
+    rbe = rebase --edit-todo
+    rba = rebase --abort
+    rbc = rebase --continue
+    l = log --decorate
+    lg = log --decorate --graph
+    lb = log --decorate --graph --branches
