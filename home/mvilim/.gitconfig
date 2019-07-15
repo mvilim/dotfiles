@@ -1,35 +1,47 @@
 [user]
-	name = Michael Vilim
-	email = michael.vilim@gmail.com
+    name = Michael Vilim
+    email = michael.vilim@gmail.com
 [core]
-	editor = nvim
-	pager = less -FR
+    editor = nvim
+    pager = less -FR
 [push]
-	followTags = true
-	default = simple
+    followTags = true
+    default = simple
+[pull]
+    rebase = true
+[merge]
+    tool = nvim
+[mergetool "nvim"]
+    cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [alias]
-	co = checkout
-	br = branch -vv
-	st = status
-	a = add
-	au = add -u
-	ad = add .
-	c = commit
-	cm = commit -m
-	ca = commit --amend
-	cp = cherry-pick
-	d = diff
-	pl = pull
-	ps = push
-	rs = reset
-	rb = rebase
-	rbi = rebase -i
-	rbe = rebase --edit-todo
-	rba = rebase --abort
-	rbc = rebase --continue
-	l = log --decorate
-	lg = log --decorate --graph
-	lb = log --decorate --graph --branches
+    co = checkout
+    br = branch -vv
+    st = status
+    a = add
+    au = add -u
+    ad = add .
+    c = commit
+    cm = commit -m
+    ca = commit --amend
+    cp = cherry-pick
+    cpa = cherry-pick --abort
+    cpc = cherry-pick --continue
+    d = diff
+    pl = pull
+    ps = push
+    rs = reset
+    rv = revert
+    rb = rebase
+    rbi = rebase -i
+    rbe = rebase --edit-todo
+    rba = rebase --abort
+    rbc = rebase --continue
+    rbs = rebase --skip
+    l = log --decorate
+    lg = log --decorate --graph
+    lb = log --decorate --graph --branches
     sh = stash
     shp = stash pop
-
+    mt = mergetool
+[rerere]
+    enabled = true
