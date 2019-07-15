@@ -27,13 +27,16 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fidian/hexmode'
-" Plugin 'wilywampa/vim-ipython'
 Plugin 'bfredl/nvim-ipy'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'mvilim/nvim_ipykm'
+Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 
 " vim specific
 Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'itchyny/lightline.vim'
+Plugin 'luochen1990/rainbow'
 
 " Note for YouCompleteMe -- can break when python version is updated -- should
 " simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py
@@ -67,6 +70,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 "
 "
+
+" source ~/.vim/bundle/vim-ipython/ftplugin/python/ipy.vim
 
 syntax enable
 set background=light
@@ -176,6 +181,12 @@ let g:clang_format#style_options = {
 " ycm mappings
 " current issues:
 " next error should cycle
+" Enter completion acceptance
+let g:ycm_key_list_select_completion = ['<Tab>', '<Down>', '<CR>']
+
+" this doesn't work as a way to close tne completion menu on enter
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<cr>"
 
 " this flickers the location list -- it'd be better if we could open it invisibly
 " it would be preferable to use a script to make it stateful and always be
@@ -215,6 +226,8 @@ let $FZF_DEFAULT_COMMAND = "fd --type f"
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
+" this should only be set for file completions -- it breaks things like
+" looking for string matches in the current file
 let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
 
 " NERDTree mappings
@@ -283,3 +296,19 @@ let g:ipy_celldef = '^##'
 
 nmap <leader>p <Plug>yankstack_substitute_older_paste<CR>
 nmap <leader>P <Plug>yankstack_substitute_newer_paste<CR>
+
+set nomodeline
+
+let g:gundo_prefer_python3 = 1
+" nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle = 1
+set undodir=/tmp/vim_undo/
+set undofile
+
+let g:rainbow_active = 1
+
+" nvim-ipykm mappings
+nnoremap <leader>kk <Cmd>IPyConnectKernel<cr>
+set winminheight=0
+let g:ipython_args = '--no-window'
