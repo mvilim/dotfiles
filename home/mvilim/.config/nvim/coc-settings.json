@@ -1,4 +1,5 @@
 {
+  "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
   "signature.enable": true,
   "languageserver": {
