@@ -30,6 +30,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'mvilim/nvim_ipykm'
 Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
+Plugin 'tpope/vim-abolish'
 
 " vim specific
 Plugin 'lukhio/vim-mapping-conflicts'
@@ -64,8 +65,6 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 "
 "
-
-" source ~/.vim/bundle/vim-ipython/ftplugin/python/ipy.vim
 
 syntax enable
 set background=light
