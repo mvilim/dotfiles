@@ -10,12 +10,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" cpp development
-Plugin 'lyuts/vim-rtags'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+" code integration
+Plugin 'neoclide/coc.nvim'
 Plugin 'rhysd/vim-clang-format'
-Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim' " required by vim vebugger
 Plugin 'idanarye/vim-vebugger'
 
 " productivity
@@ -37,10 +35,6 @@ Plugin 'mbbill/undotree'
 Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'itchyny/lightline.vim'
 Plugin 'luochen1990/rainbow'
-
-" Note for YouCompleteMe -- can break when python version is updated -- should
-" simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py
-" --system-libclang --clang-completer
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -83,9 +77,6 @@ let g:lightline = {
       \ }
       \ }
 
-let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
 set tags=./tags;
 
 " vebugger settings
@@ -178,28 +169,52 @@ let g:clang_format#style_options = {
     \ "AllowShortFunctionsOnASingleLine" : "Empty",
     \ }
 
-" ycm mappings
-" current issues:
-" next error should cycle
-" Enter completion acceptance
-let g:ycm_key_list_select_completion = ['<Tab>', '<Down>', '<CR>']
+" COC config
 
-" this doesn't work as a way to close tne completion menu on enter
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<cr>"
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" this flickers the location list -- it'd be better if we could open it invisibly
-" it would be preferable to use a script to make it stateful and always be
-" able to use cn
-nnoremap <silent> <leader>ce :YcmDiags<CR>:ll<CR>:lcl<CR>
-nnoremap <silent> <leader>cm :YcmDiags<CR>:ll<CR>
-nnoremap <silent> <leader>ci :YcmCompleter FixIt<CR>
+" COC mappings
+nnoremap <silent> <leader>gN <Plug>(coc-diagnostic-prev)
+nnoremap <silent> <leader>gn <Plug>(coc-diagnostic-next)
 
-" ycm colors
-highlight YcmErrorSection ctermbg=88
-highlight YcmErrorSign ctermbg=88
-highlight YcmWarningSection ctermbg=57
-highlight YcmWarningSign ctermbg=57
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+nnoremap <silent> <leader>ge  :<C-u>CocList diagnostics<cr>
+
+nnoremap <silent> <leader>gs :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nmap <leader>gf  <Plug>(coc-fix-current)
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+hi CocHighlightText ctermfg=white
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <silent><expr> <CR>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<CR>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " locationlist mappings
 nnoremap <silent> <leader>ll :lop<CR>
@@ -226,6 +241,7 @@ let $FZF_DEFAULT_COMMAND = "fd --type f"
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
+
 " this should only be set for file completions -- it breaks things like
 " looking for string matches in the current file
 let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
@@ -312,3 +328,11 @@ let g:rainbow_active = 1
 nnoremap <leader>kk <Cmd>IPyConnectKernel<cr>
 set winminheight=0
 let g:ipython_args = '--no-window'
+
+" disable statusline when fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" allow nvim_ipykm zero height windows
+set winminheight=0
