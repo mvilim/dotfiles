@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " code integration
-Plugin 'neoclide/coc.nvim'
+Plugin 'neoclide/coc.nvim' " must be installed with :call coc#util#install()
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Shougo/vimproc.vim' " required by vim vebugger
 Plugin 'idanarye/vim-vebugger'
