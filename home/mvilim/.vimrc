@@ -144,8 +144,20 @@ set updatetime=100
 " keep lines below and above
 set scrolloff=5
 
-" disable highlighting on escape in nvim (for use after search)
-nnoremap <esc> :noh<bar>:pclose<return><esc>
+" disable highlighting on escape in nvim (for use after search) -- perhaps we
+" should run set nohlsearch and set hlsearch to clear them
+nnoremap <silent> <esc> :noh<bar>:pclose<return>:call <SID>close_floating()<CR><esc>
+
+" would probably be better to not do this through the neovim api if possible
+function! s:close_floating()
+  let wins = nvim_list_wins()
+  for win in wins
+    silent! let is_floating = nvim_win_get_var(win, 'float')
+    if is_floating
+      call nvim_win_close(win, 0)
+    endif
+  endfor
+endfunction
 
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=238
