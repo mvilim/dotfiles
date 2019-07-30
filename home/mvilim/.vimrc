@@ -110,7 +110,7 @@ set breakindent
 set breakindentopt=shift:4
 " Ensures word-wrap does not split words
 set formatoptions=l
-set lbr
+set linebreak
 
 " Allow cursor to go beyond EOL
 set virtualedit=onemore
