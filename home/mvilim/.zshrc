@@ -69,7 +69,13 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-unsetopt share_history
+# load custom completions
+fpath+=~/.config/zsh
+autoload -U compinit && compinit
+
+unsetopt SHARE_HISTORY
+unsetopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY
 
 # User configuration
 
