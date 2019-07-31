@@ -1,5 +1,4 @@
 {
-  "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
   "signature.enable": true,
   "languageserver": {
@@ -24,6 +23,11 @@
         "completionSnippetsOn": true
       }
        }
+    },
+    "rust": {
+      "command": "ra_lsp_server",
+      "filetypes": ["rust", "rs"],
+      "rootPatterns": ["Cargo.toml"]
     }
   }
 }
