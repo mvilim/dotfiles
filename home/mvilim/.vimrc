@@ -181,22 +181,23 @@ let g:clang_format#style_options = {
     \ }
 
 " COC config
-
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " COC mappings
-nnoremap <silent> <leader>gN <Plug>(coc-diagnostic-prev)
-nnoremap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+nnoremap <silent> <leader>lN <Plug>(coc-diagnostic-prev)
+nnoremap <silent> <leader>ln <Plug>(coc-diagnostic-next)
 
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>ld <Plug>(coc-definition)
+nmap <silent> <leader>ly <Plug>(coc-type-definition)
+nmap <silent> <leader>li <Plug>(coc-implementation)
+nmap <silent> <leader>lr <Plug>(coc-references)
 
-nnoremap <silent> <leader>ge  :<C-u>CocList diagnostics<cr>
+nmap <silent> <leader>lm <Plug>(coc-rename)
 
-nnoremap <silent> <leader>gs :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>le  :<C-u>CocList diagnostics<cr>
+
+nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -217,9 +218,7 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <silent><expr> <CR>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<CR>" :
-      \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" : "\<CR>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
