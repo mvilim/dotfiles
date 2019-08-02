@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " code integration
 Plugin 'neoclide/coc.nvim' " must be installed with :call coc#util#install()
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Shougo/vimproc.vim' " required by vim vebugger
 Plugin 'idanarye/vim-vebugger'
