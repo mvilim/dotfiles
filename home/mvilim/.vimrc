@@ -321,10 +321,13 @@ function InitVimwikiCustomSyntax()
         " reload the file to force vimwiki update -- hacky, but would only
         " cause issues if we are somehow able to modify a file on disk between
         " the the vimwiki init and this function running
+        "
+        " I think this creates issues when the file does not yet exist, though
         edit
     endif
 endfunction
 autocmd FileType vimwiki call InitVimwikiCustomSyntax()
+autocmd FileType vimwiki RainbowToggleOff
 
 " fold config
 set foldmethod=indent
@@ -370,3 +373,6 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 
 " allow nvim_ipykm zero height windows
 set winminheight=0
+
+nmap <leader>yr :let @+ = expand("%")<cr>
+nmap <leader>yp :let @+ = expand("%:p")<cr>
