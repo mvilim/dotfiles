@@ -185,6 +185,13 @@ let g:clang_format#style_options = {
     \ }
 
 " COC config
+let g:coc_global_extensions = [
+       \  'coc-java',
+       \  'coc-python',
+       \  'coc-rls',
+       \  'coc-tsserver',
+       \ ]
+
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
