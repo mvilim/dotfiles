@@ -193,6 +193,9 @@ let g:coc_global_extensions = [
        \  'coc-tsserver',
        \ ]
 
+highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
+highlight CocWarningHighlight ctermbg=52 guifg=#5f0000
+
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -375,5 +378,12 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 " allow nvim_ipykm zero height windows
 set winminheight=0
 
+" path bindings
 nmap <leader>yr :let @+ = expand("%")<cr>
 nmap <leader>yp :let @+ = expand("%:p")<cr>
+
+" jinja filetype for .j2
+au BufEnter,BufNew *.j2 map <F5> :rubyf % <CR>.
+
+" highlight visual as grey
+hi Visual ctermbg=239
