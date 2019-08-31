@@ -32,6 +32,7 @@ Plugin 'mvilim/nvim_ipykm'
 Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-abolish'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " vim specific
 Plugin 'lukhio/vim-mapping-conflicts'
@@ -218,7 +219,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <leader>gf  <Plug>(coc-fix-current)
+nmap <leader>lf  <Plug>(coc-fix-current)
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
