@@ -37,6 +37,8 @@
     rba = rebase --abort
     rbc = rebase --continue
     rbs = rebase --skip
+    rt = remote -v
+    i = init
     l = log --decorate
     lg = log --decorate --graph
     lb = log --decorate --graph --branches
