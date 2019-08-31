@@ -145,6 +145,9 @@ set updatetime=100
 " keep lines below and above
 set scrolloff=5
 
+" use K to break lines
+nnoremap K i<CR><Esc>
+
 " disable highlighting on escape in nvim (for use after search) -- perhaps we
 " should run set nohlsearch and set hlsearch to clear them
 nnoremap <silent> <esc> :noh<bar>:pclose<return>:call <SID>close_floating()<CR><esc>
