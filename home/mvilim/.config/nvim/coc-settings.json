@@ -23,11 +23,6 @@
         "completionSnippetsOn": true
       }
        }
-    },
-    "rust": {
-      "command": "ra_lsp_server",
-      "filetypes": ["rust", "rs"],
-      "rootPatterns": ["Cargo.toml"]
     }
   }
 }
