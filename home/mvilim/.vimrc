@@ -22,17 +22,21 @@ Plugin 'idanarye/vim-vebugger'
 Plugin 'vimwiki/vimwiki'
 Plugin 'itchyny/calendar.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fidian/hexmode'
+" Plugin 'wilywampa/vim-ipython'
+Plugin 'bfredl/nvim-ipy'
+Plugin 'Chiel92/vim-autoformat'
 
 " vim specific
 Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'itchyny/lightline.vim'
 
 " Note for YouCompleteMe -- can break when python version is updated -- should
-" simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py 
+" simply rerun the install script: /home/mvilim/.vim/bundle/YouCompleteMe/install.py
 " --system-libclang --clang-completer
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -75,7 +79,8 @@ let g:lightline = {
       \ }
 
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
 set tags=./tags;
 
 " vebugger settings
@@ -145,7 +150,7 @@ set updatetime=100
 set scrolloff=5
 
 " disable highlighting on escape in nvim (for use after search)
-nnoremap <esc> :noh<return><esc>
+nnoremap <esc> :noh<bar>:pclose<return><esc>
 
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=238
@@ -155,6 +160,9 @@ nnoremap <leader>cw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " custom colors
 hi MatchParen ctermbg=black ctermfg=white
+
+" make ro buffers noma
+autocmd BufRead * let &l:modifiable = !&readonly
 
 " clang format mappings
 nnoremap <silent> <leader>cf :ClangFormat<CR>
@@ -207,7 +215,7 @@ let $FZF_DEFAULT_COMMAND = "fd --type f"
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
-let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1"
+let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
 
 " NERDTree mappings
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
@@ -260,3 +268,18 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+" code execution keys
+map <Leader>ee <Plug>(IPy-Run)
+map <Leader>ec <Plug>(IPy-RunCell)
+map <Leader>ea <Plug>(IPy-RunAll)
+map <Leader>ep <Plug>(IPy-Complete)
+map <Leader>ei <Plug>(IPy-WordInfo)
+map <Leader>es <Plug>(IPy-Interrupt)
+map <Leader>et <Plug>(IPy-Terminate)
+
+" ipython cell defes
+let g:ipy_celldef = '^##'
+
+nmap <leader>p <Plug>yankstack_substitute_older_paste<CR>
+nmap <leader>P <Plug>yankstack_substitute_newer_paste<CR>
