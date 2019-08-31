@@ -313,6 +313,19 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
                   \ '.mkd': 'markdown',
                   \ '.wiki': 'media'}
 
+function InitVimwikiCustomSyntax()
+    if !exists("s:vimwiki_init")
+        let s:vimwiki_init = 1
+        let g:vimwiki_syntax_variables['markdown']['rxEqIn'] = '\$\$[^$`]\+\$\$'
+        let g:vimwiki_syntax_variables['markdown']['char_eqin'] = '\$\$'
+        " reload the file to force vimwiki update -- hacky, but would only
+        " cause issues if we are somehow able to modify a file on disk between
+        " the the vimwiki init and this function running
+        edit
+    endif
+endfunction
+autocmd FileType vimwiki call InitVimwikiCustomSyntax()
+
 " fold config
 set foldmethod=indent
 set foldnestmax=10
