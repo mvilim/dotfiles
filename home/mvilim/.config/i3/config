@@ -198,26 +198,31 @@ mode "resize" {
 }
 
 # workspace default monitors
-workspace 0 output DP-4
-workspace 1 output DVI-D-0
-workspace 2 output DP-4
-workspace 3 output DVI-D-0
-workspace 4 output DP-4
-workspace 5 output DVI-D-0
-workspace 6 output DP-4
-workspace 7 output DVI-D-0
-workspace 8 output DP-4
-workspace 9 output DVI-D-0
-workspace 10 output DP-4
-workspace 11 output DVI-D-0
-workspace 12 output DP-4
-workspace 13 output DVI-D-0
-workspace 14 output DP-4
-workspace 15 output DVI-D-0
-workspace 16 output DP-4
-workspace 17 output DVI-D-0
-workspace 18 output DP-4
-workspace 19 output DVI-D-0
+# set $left_output DVI-D-0
+# set $right_output DP-4
+set $left_output Virtual1
+set $right_output Virtual2
+
+workspace 0 output Virtual2
+workspace 1 output Virtual1
+workspace 2 output Virtual2
+workspace 3 output Virtual1
+workspace 4 output Virtual2
+workspace 5 output Virtual1
+workspace 6 output Virtual2
+workspace 7 output Virtual1
+workspace 8 output Virtual2
+workspace 9 output Virtual1
+workspace 10 output Virtual2
+workspace 11 output Virtual1
+workspace 12 output Virtual2
+workspace 13 output Virtual1
+workspace 14 output Virtual2
+workspace 15 output Virtual1
+workspace 16 output Virtual2
+workspace 17 output Virtual1
+workspace 18 output Virtual2
+workspace 19 output Virtual1
 
 # Starting things with i3
 for_window [class="yakuake"] floating enable;
