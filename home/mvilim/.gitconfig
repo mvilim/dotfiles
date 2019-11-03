@@ -44,6 +44,9 @@
     lb = log --decorate --graph --branches
     sh = stash
     shp = stash pop
+    ta = tag -m "" -a
+    tam = tag -a -m
+    td = tag -d
     mt = mergetool
 [rerere]
     enabled = true
