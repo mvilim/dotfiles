@@ -84,3 +84,5 @@ URxvt.keysym.C-S-C: eval:selection_to_clipboard
 URxvt*externalBorder: 0px
 URxvt*internalBorder: 0px
 URxvt*background: S_base03
+
+Xcursor.size: 16
