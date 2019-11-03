@@ -291,6 +291,9 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" digraph remapping
+inoremap <silent> <C-d> <C-k>
+
 " alt-nav keys
 noremap <A-j> gj
 noremap <A-k> gk
