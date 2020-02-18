@@ -81,7 +81,7 @@ focus_on_window_activation focus
 #assign [class="jetbrains-idea"] 3
 #assign [class="Spotify"] 5
 
-exec_always ~/.fehbg
+exec_always --no-startup-id ~/.fehbg
 
 mode "modal" {
     bindsym Escape mode "default"
@@ -196,7 +196,7 @@ mode "resize" {
         bindsym Control+k resize shrink height 20 px or 1 ppt
         bindsym Control+l resize grow width 20 px or 1 ppt
 
-        bindsym Escape mode "Modal"
+        bindsym Escape mode "modal"
 }
 
 # workspace default monitors

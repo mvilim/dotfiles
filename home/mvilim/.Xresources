@@ -1,4 +1,6 @@
-URxvt*font:           xft:Hack:pixelsize=11
+!! requires https://aur.archlinux.org/ttf-nanumgothic_coding.git package
+URxvt*font:           xft:Hack:pixelsize=11,\
+                      xft:NanumGothicCoding
 
 !! solarized colors from https://github.com/solarized/xresources/blob/master/Xresources.dark
 !! overiding the background to be grey instead of blue

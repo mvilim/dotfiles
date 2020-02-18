@@ -16,6 +16,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Shougo/vimproc.vim' " required by vim vebugger
 Plugin 'idanarye/vim-vebugger'
+Plugin 'puremourning/vimspector'
 
 " productivity
 Plugin 'vimwiki/vimwiki'
@@ -33,6 +34,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-abolish'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'xuhdev/vim-latex-live-preview'
 
 " vim specific
 Plugin 'lukhio/vim-mapping-conflicts'
@@ -183,6 +185,7 @@ let g:clang_format#detect_style_file = 1
 let g:clang_format#style_options = {
     \ "AllowShortBlocksOnASingleLine" : "false",
     \ "AllowShortFunctionsOnASingleLine" : "Empty",
+    \ "SortIncludes" : "false",
     \ }
 
 " COC config
@@ -370,6 +373,8 @@ let g:rainbow_active = 1
 
 " nvim-ipykm mappings
 nnoremap <leader>kk <Cmd>IPyConnectKernel<cr>
+nnoremap <leader>kr <Cmd>IPyRestartKernel<cr>
+nnoremap <leader>ki <Cmd>IPyInterruptKernel<cr>
 set winminheight=0
 let g:ipython_args = '--no-window'
 
@@ -390,3 +395,6 @@ au BufEnter,BufNew *.j2 map <F5> :rubyf % <CR>.
 
 " highlight visual as grey
 hi Visual ctermbg=239
+
+" tex preview
+let g:livepreview_cursorhold_recompile = 0
