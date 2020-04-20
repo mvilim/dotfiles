@@ -1,3 +1,5 @@
+# vim: ft=zsh
+
 # zsh template ---
 
 # If you come from bash you might have to change your $PATH.
@@ -128,10 +130,6 @@ function detach { nohup "$1" > /dev/null&; }
 export FZF_DEFAULT_OPTS="--delimiter=/ --nth=-1,.. --tiebreak=end"
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_CTRL_T_COMMAND="fd"
-
-# should find a more portable way to set this
-export PATH="${PATH}:$HOME/.gem/ruby/2.5.0/bin"
-export PATH="${PATH}:$HOME/.cargo/bin"
 
 export KEYTIMEOUT=1
 export EDITOR=/usr/bin/nvim
@@ -276,10 +274,8 @@ zle-line-init () {
 vi-insert
 }
 #zle -N zle-line-init
+#
 
-# added by travis gem
-[ -f /home/mvilim/.travis/travis.sh ] && source /home/mvilim/.travis/travis.sh
-
-# add fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+{{ if .has_local_templates}}
+{{ template "local/dot_zshrc" }}
+{{ end }}

@@ -1,6 +1,7 @@
 {
   "diagnostic.enable": true,
   "signature.enable": true,
+  "rust-analyzer.enableCargoWatchOnStartup": true,
   "languageserver": {
     "ccls": {
       "command": "ccls",

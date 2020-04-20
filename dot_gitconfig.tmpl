@@ -1,9 +1,10 @@
 [user]
     name = Michael Vilim
-    email = michael.vilim@gmail.com
+    email = {{ .email }}
 [core]
     editor = nvim
     pager = less -FR
+    autocrlf = false
 [push]
     followTags = true
     default = simple
@@ -50,3 +51,8 @@
     mt = mergetool
 [rerere]
     enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

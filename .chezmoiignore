@@ -1,0 +1,9 @@
+{{- if ne .chezmoi.hostname "mvilim2" }}
+.imwheelrc
+.config/compton/compton.conf
+{{- end }}
+
+LICENSE
+README.md
+keyboard/
+misc/

@@ -1,3 +1,5 @@
+!! vim: ft=xdefaults
+
 !! requires https://aur.archlinux.org/ttf-nanumgothic_coding.git package
 URxvt*font:           xft:Hack:pixelsize=11,\
                       xft:NanumGothicCoding
@@ -66,7 +68,7 @@ URxvt.letterSpace: 0
 URxvt.saveLines: 5000
 
 !! enable the vim scrollback extension (note that you must use an absolute path, no ~/...)
-urxvt*perl-lib: /home/mvilim/repos/urxvt-vim-scrollback
+urxvt*perl-lib: {{.repo_dir}}/urxvt-vim-scrollback
 urxvt*perl-ext-common: vim-scrollback,eval
 
 !! configure alt-s as the keybinding to enter vim scrollback mode.

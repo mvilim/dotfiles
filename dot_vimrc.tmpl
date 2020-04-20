@@ -1,3 +1,5 @@
+" vim: ft=vim
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -40,6 +42,7 @@ Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'lukhio/vim-mapping-conflicts'
 Plugin 'itchyny/lightline.vim'
 Plugin 'luochen1990/rainbow'
+Plugin 'mattn/getsid-vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -151,20 +154,22 @@ set scrolloff=5
 " use K to break lines
 nnoremap K i<CR><Esc>
 
-" disable highlighting on escape in nvim (for use after search) -- perhaps we
-" should run set nohlsearch and set hlsearch to clear them
-nnoremap <silent> <esc> :noh<bar>:pclose<return>:call <SID>close_floating()<CR><esc>
+if has('nvim')
+  " disable highlighting on escape in nvim (for use after search) -- perhaps we
+  " should run set nohlsearch and set hlsearch to clear them
+  nnoremap <silent> <esc> :noh<bar>:pclose<return>:call <SID>close_floating()<CR><esc>
 
-" would probably be better to not do this through the neovim api if possible
-function! s:close_floating()
-  let wins = nvim_list_wins()
-  for win in wins
-    silent! let is_floating = nvim_win_get_var(win, 'float')
-    if is_floating
-      call nvim_win_close(win, 0)
-    endif
-  endfor
-endfunction
+  " would probably be better to not do this through the neovim api if possible
+  function! s:close_floating()
+    let wins = nvim_list_wins()
+    for win in wins
+      silent! let is_floating = nvim_win_get_var(win, 'float')
+      if is_floating
+        call nvim_win_close(win, 0)
+      endif
+    endfor
+  endfunction
+endif
 
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=238
@@ -192,7 +197,6 @@ let g:clang_format#style_options = {
 let g:coc_global_extensions = [
        \  'coc-java',
        \  'coc-python',
-       \  'coc-rls',
        \  'coc-tsserver',
        \ ]
 
@@ -328,16 +332,37 @@ function InitVimwikiCustomSyntax()
         let s:vimwiki_init = 1
         let g:vimwiki_syntax_variables['markdown']['rxEqIn'] = '\$\$[^$`]\+\$\$'
         let g:vimwiki_syntax_variables['markdown']['char_eqin'] = '\$\$'
+        " should pull out a variable with the vundle path and note that it is
+        " vundle specific
+        " let g:test = GetSID("~/.vim/bundle/vimwiki/plugin/vimwiki.vim")
+        " let g:test = GetSID("~/.vim/bundle/vimwiki/syntax/vimwiki_markdown.vim")
+        " call function("<SNR>27_setup_buffer_leave")()
+        " call function("<SNR>27_setup_new_wiki_buffer")()
+
+        " echom 'calling'
+        " call function("<SNR>27_setup_buffer_enter")()
+
+        " let <SNR>117_markdown_syntax.rxEqIn = '\$\$[^$`]\+\$\$'
+
+        " echom 'called'
         " reload the file to force vimwiki update -- hacky, but would only
         " cause issues if we are somehow able to modify a file on disk between
         " the the vimwiki init and this function running
         "
         " I think this creates issues when the file does not yet exist, though
-        edit
+        " try
+        silent! edit
+        " catch
+        " endtry
     endif
 endfunction
 autocmd FileType vimwiki call InitVimwikiCustomSyntax()
+" autocmd BufReadPre * call InitVimwikiCustomSyntax()
 autocmd FileType vimwiki RainbowToggleOff
+
+" call vimwiki#vars#init()
+" let g:vimwiki_syntax_variables['markdown']['rxEqIn'] = '\$\$[^$`]\+\$\$'
+" let g:vimwiki_syntax_variables['markdown']['char_eqin'] = '\$\$'
 
 " fold config
 set foldmethod=indent
@@ -360,7 +385,8 @@ let g:ipy_celldef = '^##'
 nmap <leader>p <Plug>yankstack_substitute_older_paste<CR>
 nmap <leader>P <Plug>yankstack_substitute_newer_paste<CR>
 
-set nomodeline
+" should probably restrict modelines further
+" set nomodeline
 
 let g:gundo_prefer_python3 = 1
 " nnoremap <leader>u :GundoToggle<CR>
@@ -398,3 +424,6 @@ hi Visual ctermbg=239
 
 " tex preview
 let g:livepreview_cursorhold_recompile = 0
+
+let g:vimspector_enable_mappings = 'HUMAN'
+" packadd! vimspector
