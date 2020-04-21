@@ -13,7 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " code integration
-Plugin 'neoclide/coc.nvim' " must be installed with :call coc#util#install()
+Plugin 'neoclide/coc.nvim' " must use release branch, must be installed with :call coc#util#install()
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Shougo/vimproc.vim' " required by vim vebugger
@@ -183,15 +183,16 @@ hi MatchParen ctermbg=black ctermfg=white
 " make ro buffers noma
 autocmd BufRead * let &l:modifiable = !&readonly
 
+" should use vim autoformat to pull in clangformat
 " clang format mappings
-nnoremap <silent> <leader>cf :ClangFormat<CR>
+" nnoremap <silent> <leader>cf :ClangFormat<CR>
 
-let g:clang_format#detect_style_file = 1
-let g:clang_format#style_options = {
-    \ "AllowShortBlocksOnASingleLine" : "false",
-    \ "AllowShortFunctionsOnASingleLine" : "Empty",
-    \ "SortIncludes" : "false",
-    \ }
+" let g:clang_format#detect_style_file = 1
+" let g:clang_format#style_options = {
+"     \ "AllowShortBlocksOnASingleLine" : "false",
+"     \ "AllowShortFunctionsOnASingleLine" : "Empty",
+"     \ "SortIncludes" : "false",
+"     \ }
 
 " COC config
 let g:coc_global_extensions = [
@@ -252,11 +253,15 @@ endfunction
 nnoremap <silent> <leader>ll :lop<CR>
 nnoremap <silent> <leader>ln :lnext<CR>
 nnoremap <silent> <leader>lp :lprev<CR>
+" quickfixlist mappings
+nnoremap <silent> <leader>ql :copen<CR>
+nnoremap <silent> <leader>qn :cn<CR>
+nnoremap <silent> <leader>qp :cp<CR>
 " make location list close by default (and shift cr keeps it open)
 autocmd FileType qf nnoremap <buffer> <silent> <cr> <cr>:lcl<cr>
 autocmd FileType qf nnoremap <buffer> <silent> p <cr>:lop<cr>
 autocmd FileType qf nnoremap <buffer> <silent> o <cr>
-autocmd FileType qf nnoremap <buffer> <silent> <Esc> :lcl<cr>
+autocmd FileType qf nnoremap <buffer> <silent> <Esc> :lcl<cr> :ccl<cr>
 
 " fzf mappings
 nnoremap <silent> <leader>ff :Files<CR>
@@ -267,6 +272,9 @@ nnoremap <silent> <leader>fl :BLines<CR>
 nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
+
+" ignore filename in ripgrep
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " use fd as fzf find command
 let $FZF_DEFAULT_COMMAND = "fd --type f"
@@ -427,3 +435,14 @@ let g:livepreview_cursorhold_recompile = 0
 
 let g:vimspector_enable_mappings = 'HUMAN'
 " packadd! vimspector
+
+nmap <leader>lf :let @+ = expand("%")<cr>
+
+nnoremap <silent> <leader>cf :Autoformat<CR>
+
+" close buffer without closing window
+command Bd bp\|bd \#
+
+{{ if .has_local_templates}}
+{{ template "local/dot_vimrc" }}
+{{ end }}

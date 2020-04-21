@@ -3,7 +3,7 @@
     email = {{ .email }}
 [core]
     editor = nvim
-    pager = less -FR
+    pager = less -FXR
     autocrlf = false
 [push]
     followTags = true
@@ -17,6 +17,7 @@
 [alias]
     co = checkout
     br = branch -vv
+    brr = branch -vv -r
     st = status
     a = add
     au = add -u
@@ -41,7 +42,7 @@
     rt = remote -v
     i = init
     l = log --decorate
-    lg = log --decorate --graph
+    lg = log --decorate --graph --topo-order
     lb = log --decorate --graph --branches
     sh = stash
     shp = stash pop

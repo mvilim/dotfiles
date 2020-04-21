@@ -3,6 +3,10 @@
 .config/compton/compton.conf
 {{- end }}
 
+{{- if eq .chezmoi.hostname "mvilim-laptop" }}
+.config/i3/*
+{{- end }}
+
 LICENSE
 README.md
 keyboard/

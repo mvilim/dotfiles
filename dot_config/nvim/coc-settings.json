@@ -1,4 +1,5 @@
 {
+  "python.jediEnabled": false,
   "diagnostic.enable": true,
   "signature.enable": true,
   "rust-analyzer.enableCargoWatchOnStartup": true,
