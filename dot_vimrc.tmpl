@@ -253,10 +253,12 @@ endfunction
 nnoremap <silent> <leader>ll :lop<CR>
 nnoremap <silent> <leader>ln :lnext<CR>
 nnoremap <silent> <leader>lp :lprev<CR>
+nnoremap <silent> <leader>lc :lclose<CR>
 " quickfixlist mappings
 nnoremap <silent> <leader>ql :copen<CR>
 nnoremap <silent> <leader>qn :cn<CR>
 nnoremap <silent> <leader>qp :cp<CR>
+nnoremap <silent> <leader>qc :cclose<CR>
 " make location list close by default (and shift cr keeps it open)
 autocmd FileType qf nnoremap <buffer> <silent> <cr> <cr>:lcl<cr>
 autocmd FileType qf nnoremap <buffer> <silent> p <cr>:lop<cr>
