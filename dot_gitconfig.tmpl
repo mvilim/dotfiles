@@ -24,6 +24,7 @@
     a = add
     au = add -u
     ad = add .
+    ai = !git add $(git ls-files --modified --others --exclude-standard | fzf -m)
     c = commit
     cm = commit -m
     ca = commit --amend
