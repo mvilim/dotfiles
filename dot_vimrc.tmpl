@@ -276,15 +276,17 @@ nnoremap <silent> <leader>fl :BLines<CR>
 nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
+nnoremap <silent> <leader>fxh :Rgxh<CR>
 nnoremap <silent> <leader>fi :Rgi<CR>
 "xnoremap <silent> <leader>fv :Rgv<CR>
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
 
 " should dedupe the below
 " ignore filename in ripgrep
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=* Rgi call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(expand('<cword>'))}, <bang>0)
-command! -bang -nargs=* Rgv call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(s:get_visual_selection())}, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rgxh call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rgi call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(expand('<cword>'))}, <bang>0)
+command! -bang -nargs=* Rgv call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(s:get_visual_selection())}, <bang>0)
 
 " from https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
 function! s:get_visual_selection()
