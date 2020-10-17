@@ -1,0 +1,25 @@
+From ac2e9f63dd859564149cb37a555a981a749c74af Mon Sep 17 00:00:00 2001
+From: Michael Vilim <michael.vilim@gmail.com>
+Date: Sat, 17 Oct 2020 17:12:45 -0500
+Subject: [PATCH] Claim all buffers are files due to conflict with Comrade
+
+---
+ autoload/gitgutter/utility.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/autoload/gitgutter/utility.vim b/autoload/gitgutter/utility.vim
+index 4a02c2f..0a58bf3 100644
+--- a/autoload/gitgutter/utility.vim
++++ b/autoload/gitgutter/utility.vim
+@@ -61,7 +61,7 @@ function! s:not_git_dir(bufnr) abort
+ endfunction
+ 
+ function! s:is_file_buffer(bufnr) abort
+-  return empty(getbufvar(a:bufnr, '&buftype'))
++  return 1
+ endfunction
+ 
+ " From tpope/vim-fugitive
+-- 
+2.27.0
+

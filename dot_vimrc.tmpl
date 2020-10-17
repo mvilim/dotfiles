@@ -1,77 +1,46 @@
 " vim: ft=vim
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" to install vim-plug
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
+call plug#begin()
 " code integration
-Plugin 'neoclide/coc.nvim' " must use release branch, must be installed with :call coc#util#install()
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'Shougo/vimproc.vim' " required by vim vebugger
-Plugin 'idanarye/vim-vebugger'
-Plugin 'puremourning/vimspector'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rhysd/vim-clang-format'
+Plug 'Shougo/vimproc.vim' " required by vim vebugger
+Plug 'idanarye/vim-vebugger'
+Plug 'puremourning/vimspector'
+Plug 'beeender/Comrade'
 
 " productivity
-Plugin 'vimwiki/vimwiki'
-Plugin 'itchyny/calendar.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'maxbrunsfeld/vim-yankstack'
-Plugin 'junegunn/fzf.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'fidian/hexmode'
-Plugin 'bfredl/nvim-ipy'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'mvilim/nvim_ipykm'
-Plugin 'sjl/gundo.vim'
-Plugin 'mbbill/undotree'
-Plugin 'tpope/vim-abolish'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'xuhdev/vim-latex-live-preview'
+Plug 'vimwiki/vimwiki'
+Plug 'itchyny/calendar.vim'
+Plug 'airblade/vim-gitgutter', {'do': 'git am `chezmoi source-path`/misc/vim-plug-hooks/0001-Claim-all-buffers-are-files-due-to-conflict-with-Com.patch'}
+Plug 'tpope/vim-fugitive'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'fidian/hexmode'
+Plug 'bfredl/nvim-ipy'
+Plug 'Chiel92/vim-autoformat'
+Plug 'mvilim/nvim_ipykm'
+Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-abolish'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'xuhdev/vim-latex-live-preview'
 
 " vim specific
-Plugin 'lukhio/vim-mapping-conflicts'
-Plugin 'itchyny/lightline.vim'
-Plugin 'luochen1990/rainbow'
-Plugin 'mattn/getsid-vim'
+Plug 'lukhio/vim-mapping-conflicts'
+Plug 'itchyny/lightline.vim'
+Plug 'luochen1990/rainbow'
+Plug 'mattn/getsid-vim'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"
-"
+call plug#end()
 
 syntax enable
 set background=light
@@ -179,6 +148,7 @@ nnoremap <leader>cw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " custom colors
 hi MatchParen ctermbg=black ctermfg=white
+highlight! link SignColumn LineNr
 
 " make ro buffers noma
 autocmd BufRead * let &l:modifiable = !&readonly
@@ -199,6 +169,7 @@ let g:coc_global_extensions = [
        \  'coc-java',
        \  'coc-python',
        \  'coc-tsserver',
+       \  'coc-comrade',
        \ ]
 
 highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
