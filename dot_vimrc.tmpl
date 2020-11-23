@@ -247,7 +247,8 @@ nnoremap <silent> <leader>fl :BLines<CR>
 nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
-nnoremap <silent> <leader>fxh :Rgxh<CR>
+nnoremap <silent> <leader>fxrh :Rgxrh<CR>
+nnoremap <silent> <leader>fxfh :Rgxfh<CR>
 nnoremap <silent> <leader>fi :Rgi<CR>
 "xnoremap <silent> <leader>fv :Rgv<CR>
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
@@ -255,7 +256,7 @@ vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
 " should dedupe the below
 " ignore filename in ripgrep
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=* Rgxh call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rgxrh call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 command! -bang -nargs=* Rgi call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(expand('<cword>'))}, <bang>0)
 command! -bang -nargs=* Rgv call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(s:get_visual_selection())}, <bang>0)
 
@@ -273,7 +274,7 @@ function! s:get_visual_selection()
 endfunction
 
 " use fd as fzf find command
-let $FZF_DEFAULT_COMMAND = "fd --hidden --type f"
+let $FZF_DEFAULT_COMMAND = "fd --type f"
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
