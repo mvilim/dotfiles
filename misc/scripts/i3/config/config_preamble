@@ -1,0 +1,23 @@
+#workspace 11 output $left_outer
+#workspace 13 output $left_outer
+#workspace 15 output $left_outer
+#workspace 17 output $left_outer
+#workspace 19 output $left_outer
+#
+#workspace 1 output $left_inner
+#workspace 3 output $left_inner
+#workspace 5 output $left_inner
+#workspace 7 output $left_inner
+#workspace 9 output $left_inner
+#
+#workspace 0 output $right_inner
+#workspace 2 output $right_inner
+#workspace 4 output $right_inner
+#workspace 6 output $right_inner
+#workspace 8 output $right_inner
+#
+#workspace 10 output $right_outer
+#workspace 12 output $right_outer
+#workspace 14 output $right_outer
+#workspace 16 output $right_outer
+#workspace 18 output $right_outer

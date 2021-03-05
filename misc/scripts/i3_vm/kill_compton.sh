@@ -1,0 +1,1 @@
+killall compton || true

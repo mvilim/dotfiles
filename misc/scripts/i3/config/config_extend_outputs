@@ -1,0 +1,6 @@
+set $left_outer fake-0
+set $left_inner fake-1
+set $right_inner fake-2
+set $right_outer fake-3
+
+#exec_always /home/mvilim/repos/scripts/i3/extend_workspaces.sh

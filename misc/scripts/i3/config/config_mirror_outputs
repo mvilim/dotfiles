@@ -1,0 +1,9 @@
+set $left_output fake-0
+set $right_output fake-1
+
+set $left_outer $left_output
+set $left_inner $left_output
+set $right_inner $right_output
+set $right_outer $right_output
+
+#exec_always /home/mvilim/repos/scripts/i3/mirror_workspaces.sh
