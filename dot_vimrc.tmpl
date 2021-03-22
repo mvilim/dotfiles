@@ -248,17 +248,28 @@ nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
 nnoremap <silent> <leader>fxrh :Rgxrh<CR>
-nnoremap <silent> <leader>fxfh :Rgxfh<CR>
 nnoremap <silent> <leader>fi :Rgi<CR>
-"xnoremap <silent> <leader>fv :Rgv<CR>
+" See https://stackoverflow.com/questions/13830874/why-do-some-vim-mappings-include-c-u-after-a-colon
+" <C-U> (Ctrl-U) clears the visual selection from the prompt :
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
 
-" should dedupe the below
 " ignore filename in ripgrep
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=* Rgxrh call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --hidden ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-command! -bang -nargs=* Rgi call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(expand('<cword>'))}, <bang>0)
-command! -bang -nargs=* Rgv call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4.. -q '.shellescape(s:get_visual_selection())}, <bang>0)
+let s:rg = 'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!**/.git/**" '
+let s:fzf_options = '--delimiter : --nth 4..'
+function s:make_fzf_query_options(query)
+  return s:fzf_options . ' -q ' . query
+endfunction
+
+function s:make_fzf_options_dict(fzf_options)
+  return {'options': a:fzf_options}
+endfunction
+
+let s:fzf_options_dict = s:make_fzf_options_dict(s:fzf_options)
+
+command! -bang -nargs=* Rg call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:fzf_options_dict, <bang>0)
+command! -bang -nargs=* Rgxh call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:fzf_options_dict, <bang>0)
+command! -bang -nargs=* Rgi call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.shellescape(expand('<cword>'))), <bang>0)
+command! -bang -nargs=* Rgv call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.s:get_visual_selection())), <bang>0)
 
 " from https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
 function! s:get_visual_selection()
@@ -268,13 +279,13 @@ function! s:get_visual_selection()
     if len(lines) == 0
         return ''
     endif
-    let lines[-1] = lines[-1][: column_end - 2]
+    let lines[-1] = lines[-1][: column_end - 1]
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
 endfunction
 
 " use fd as fzf find command
-let $FZF_DEFAULT_COMMAND = "fd --type f"
+let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude **/.git/'
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames
