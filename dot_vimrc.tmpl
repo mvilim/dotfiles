@@ -9,6 +9,7 @@ set nocompatible
 call plug#begin()
 " code integration
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rhysd/vim-clang-format'
 Plug 'Shougo/vimproc.vim' " required by vim vebugger
@@ -294,6 +295,9 @@ let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude "**/.git/"'
 " this should only be set for file completions -- it breaks things like
 " looking for string matches in the current file
 let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
+
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_preview_window = []
 
 " NERDTree mappings
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
