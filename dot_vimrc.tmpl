@@ -175,9 +175,12 @@ let g:coc_global_extensions = [
 
 highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
 highlight CocWarningHighlight ctermbg=52 guifg=#5f0000
+highlight CocHintSign ctermfg=240
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nnoremap <silent> <leader>lf :Autoformat<CR>
 
 " COC mappings
 nnoremap <silent> <leader>lN <Plug>(coc-diagnostic-prev)
@@ -449,13 +452,9 @@ let g:livepreview_cursorhold_recompile = 0
 let g:vimspector_enable_mappings = 'HUMAN'
 " packadd! vimspector
 
-nmap <leader>lf :let @+ = expand("%")<cr>
-
-nnoremap <silent> <leader>cf :Autoformat<CR>
-
 " close buffer without closing window
 command Bd bp\|bd \#
 
-{{ if .has_local_templates}}
+{{ if .has_local_templates }}
 {{ template "local/dot_vimrc" }}
 {{ end }}

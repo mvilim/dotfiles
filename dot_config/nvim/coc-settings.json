@@ -3,6 +3,7 @@
   "diagnostic.enable": true,
   "signature.enable": true,
   "rust-analyzer.enableCargoWatchOnStartup": true,
+  "rust-analyzer.procMacro.enable": true,
   "languageserver": {
     "ccls": {
       "command": "ccls",
