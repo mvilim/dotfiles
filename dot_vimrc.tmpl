@@ -89,6 +89,8 @@ set breakindentopt=shift:4
 set formatoptions=l
 set linebreak
 
+au FileType * set fo-=o
+
 " Allow cursor to go beyond EOL
 set virtualedit=onemore
 nnoremap $ $l
