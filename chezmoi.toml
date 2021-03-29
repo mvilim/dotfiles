@@ -1,0 +1,11 @@
+# it's possible we should use a bootstrap file that allows chezmoi to render its own config as a template
+
+# this file should be located at ~/.config/chezmoi/chezmoi.toml
+sourceDir = "/home/mvilim/repos/dotfiles"
+[data]
+    # place local templates into .chezmoitemplates/local (preferably as a nested git repo)
+    has_local_templates = true
+    email = "michael.vilim@gmail.com"
+    repo_dir = "/home/mvilim/repos"
+[diff]
+    pager = ""

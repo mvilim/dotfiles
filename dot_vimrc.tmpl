@@ -457,6 +457,6 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " close buffer without closing window
 command Bd bp\|bd \#
 
-{{ if .has_local_templates }}
-{{ template "local/dot_vimrc" }}
-{{ end }}
+{{ if .has_local_templates -}}
+{{ template "local/dot_vimrc" -}}
+{{ end -}}
