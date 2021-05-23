@@ -143,6 +143,21 @@ if has('nvim')
   endfunction
 endif
 
+" for debugging highlighting
+" https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
+nnoremap <leader>ihs :call SynStack()<CR>
+nnoremap <leader>iht :call SynGroup()<CR>
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=238
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -178,6 +193,10 @@ let g:coc_global_extensions = [
 highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
 highlight CocWarningHighlight ctermbg=52 guifg=#5f0000
 highlight CocHintSign ctermfg=240
+" since I don't use nvim through a GUI, this has no impact besides disabling
+" the default highlight; for some reason term=NONE does not work unless issued
+" after startup
+highlight CocHintHighlight guifg=#FFFFFF
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
