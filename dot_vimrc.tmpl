@@ -128,6 +128,7 @@ nnoremap K i<CR><Esc>
 if has('nvim')
   " disable highlighting on escape in nvim (for use after search) -- perhaps we
   " should run set nohlsearch and set hlsearch to clear them
+  " this also applies to the CocOpenFloatPrompt
   nnoremap <silent> <esc> :noh<bar>:pclose<return>:call <SID>close_floating()<CR><esc>
 
   " would probably be better to not do this through the neovim api if possible
@@ -217,6 +218,7 @@ xmap <silent> <leader>lav <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>lac <Plug>(coc-codeaction-cursor)
 nmap <silent> <leader>laa <Plug>(coc-codeaction
 nmap <silent> <leader>lar <Plug>(coc-rename)
+vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
 
 nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
 
@@ -231,6 +233,17 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 hi CocHighlightText ctermfg=white
+
+autocmd User CocOpenFloatPrompt call s:coc_configure_floating_window()
+
+function s:coc_configure_floating_window() abort
+    iunmap <buffer> <C-a>
+    iunmap <buffer> <C-e>
+    iunmap <buffer> <esc>
+    nunmap <buffer> <esc>
+    call feedkeys("\<esc>^", 'n')
+    nmap <buffer> <cr> i<cr>
+endfunction
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
