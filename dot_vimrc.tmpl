@@ -201,26 +201,27 @@ highlight CocHintHighlight guifg=#FFFFFF
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-noremap <silent> <leader>lf :Autoformat<CR>
+nnoremap <silent> <leader>laf :Autoformat<CR>
 
 " COC mappings
 nnoremap <silent> <leader>lN <Plug>(coc-diagnostic-prev)
 nnoremap <silent> <leader>ln <Plug>(coc-diagnostic-next)
-nnoremap <silent> <leader>le :<C-u>CocList diagnostics<cr>
 
-nmap <silent> <leader>ld <Plug>(coc-definition)
-nmap <silent> <leader>ly <Plug>(coc-type-definition)
-nmap <silent> <leader>li <Plug>(coc-implementation)
-nmap <silent> <leader>lr <Plug>(coc-references)
-nmap <silent> <leader>laf <Plug>(coc-fix-current)
-nmap <silent> <leader>lav <Plug>(coc-codeaction-selected)
-xmap <silent> <leader>lav <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>lac <Plug>(coc-codeaction-cursor)
-nmap <silent> <leader>laa <Plug>(coc-codeaction
-nmap <silent> <leader>lar <Plug>(coc-rename)
-vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
+nnoremap <silent> <leader>ld <Plug>(coc-definition)
+nnoremap <silent> <leader>ly <Plug>(coc-type-definition)
+nnoremap <silent> <leader>li <Plug>(coc-implementation)
+nnoremap <silent> <leader>lr <Plug>(coc-references)
+nnoremap <silent> <leader>laf <Plug>(coc-fix-current)
+nnoremap <silent> <leader>lav <Plug>(coc-codeaction-selected)
+xnoremap <silent> <leader>lav <Plug>(coc-codeaction-selected)
+nnoremap <silent> <leader>lac <Plug>(coc-codeaction-cursor)
+nnoremap <silent> <leader>laa <Plug>(coc-codeaction
+nnoremap <silent> <leader>lar <Plug>(coc-rename)
 
 nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
+
+nnoremap <silent> <leader>lfd :CocFzfList diagnostics<cr>
+nnoremap <silent> <leader>lfs :CocFzfList symbols<cr>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
