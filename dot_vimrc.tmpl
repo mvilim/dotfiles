@@ -221,6 +221,8 @@ nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
 
 nnoremap <silent> <leader>lfd :CocFzfList diagnostics<cr>
 nnoremap <silent> <leader>lfs :CocFzfList symbols<cr>
+nnoremap <silent> <leader>lfo :CocFzfList outline<cr>
+nnoremap <silent> <leader>lfc :CocFzfList commands<cr>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
