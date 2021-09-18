@@ -1,4 +1,7 @@
-exec_always --no-startup-id compton
+# disabled because it caused some rendering glitches
+# was reuiqred for proper nvim redraws on multi-screen vmware vm
+# but pci passthrough removes the need
+# exec_always --no-startup-id compton
 
 # colors
 set $black       #212121
@@ -70,11 +73,14 @@ focus_follows_mouse no
 # because new windows don't open immediately, stealing the focus after we've started to do something else can be annoying
 # it would be better if we could connect our action to the operation based on a timer and decide focus based on that
 no_focus [tiling]
+# no_focus [floating]
 # we don't want to focus on every urgent window
 # for_window [urgent="latest"] focus
 # but we do want to focus windows that request focus regardless of the workspace -- for example, if we click a link.
 # again, we run into the issue where autofocus is only disliked if there is a DELAY on the new window opening
-focus_on_window_activation focus
+focus_on_window_activation urgent
+
+for_window [class="smplayer"] floating disable
 
 # trying to cause applications to workspaces causes some problems
 #assign [class="Chromium"] 1
@@ -82,8 +88,49 @@ focus_on_window_activation focus
 #assign [class="Spotify"] 5
 
 exec_always --no-startup-id ~/.fehbg
-
 exec_always pulseeffects --gapplication-service
+
+workspace 0 output DisplayPort-3
+workspace 1 output DisplayPort-2
+workspace 2 output DisplayPort-3
+workspace 3 output DisplayPort-2
+workspace 4 output DisplayPort-3
+workspace 5 output DisplayPort-2
+workspace 6 output DisplayPort-3
+workspace 7 output DisplayPort-2
+workspace 8 output DisplayPort-3
+workspace 9 output DisplayPort-2
+workspace 10 output DisplayPort-3
+workspace 11 output DisplayPort-2
+workspace 12 output DisplayPort-3
+workspace 13 output DisplayPort-2
+workspace 14 output DisplayPort-3
+workspace 15 output DisplayPort-2
+workspace 16 output DisplayPort-3
+workspace 17 output DisplayPort-2
+workspace 18 output DisplayPort-3
+workspace 19 output DisplayPort-2
+
+exec_always i3-msg [workspace=0] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=1] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=2] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=3] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=4] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=5] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=6] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=7] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=8] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=9] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=10] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=11] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=12] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=13] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=14] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=15] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=16] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=17] move workspace to output DisplayPort-2
+exec_always i3-msg [workspace=18] move workspace to output DisplayPort-3
+exec_always i3-msg [workspace=19] move workspace to output DisplayPort-2
 
 mode "modal" {
     bindsym Escape mode "default"
@@ -91,6 +138,8 @@ mode "modal" {
     bindsym j focus down
     bindsym k focus up
     bindsym l focus right
+
+    bindsym u [urgent="latest"] focus
 
     bindsym v split v
     bindsym c split h
@@ -106,26 +155,29 @@ mode "modal" {
     bindsym Shift+v layout splitv
     bindsym Shift+c layout splith
 
-    bindsym 0 workspace 0
-    bindsym 1 workspace 1
-    bindsym 2 workspace 2
-    bindsym 3 workspace 3
-    bindsym 4 workspace 4
-    bindsym 5 workspace 5
-    bindsym 6 workspace 6
-    bindsym 7 workspace 7
-    bindsym 8 workspace 8
-    bindsym 9 workspace 9
-    bindsym Control+0 workspace 10
-    bindsym Control+1 workspace 11
-    bindsym Control+2 workspace 12
-    bindsym Control+3 workspace 13
-    bindsym Control+4 workspace 14
-    bindsym Control+5 workspace 15
-    bindsym Control+6 workspace 16
-    bindsym Control+7 workspace 17
-    bindsym Control+8 workspace 18
-    bindsym Control+9 workspace 19
+    # removed automatic move, rely on exec_always move
+    # bindsym X workspace X; [workspace=X] move workspace to output [OUTPUT]
+
+    bindsym 0 workspace 0; [workspace=0] move workspace to output DisplayPort-3
+    bindsym 1 workspace 1; [workspace=1] move workspace to output DisplayPort-2
+    bindsym 2 workspace 2; [workspace=2] move workspace to output DisplayPort-3
+    bindsym 3 workspace 3; [workspace=3] move workspace to output DisplayPort-2
+    bindsym 4 workspace 4; [workspace=4] move workspace to output DisplayPort-3
+    bindsym 5 workspace 5; [workspace=5] move workspace to output DisplayPort-2
+    bindsym 6 workspace 6; [workspace=6] move workspace to output DisplayPort-3
+    bindsym 7 workspace 7; [workspace=7] move workspace to output DisplayPort-2
+    bindsym 8 workspace 8; [workspace=8] move workspace to output DisplayPort-3
+    bindsym 9 workspace 9; [workspace=9] move workspace to output DisplayPort-2
+    bindsym Control+0 workspace 10; [workspace=10] move workspace to output DisplayPort-3
+    bindsym Control+1 workspace 11; [workspace=11] move workspace to output DisplayPort-2
+    bindsym Control+2 workspace 12; [workspace=12] move workspace to output DisplayPort-3
+    bindsym Control+3 workspace 13; [workspace=13] move workspace to output DisplayPort-2
+    bindsym Control+4 workspace 14; [workspace=14] move workspace to output DisplayPort-3
+    bindsym Control+5 workspace 15; [workspace=15] move workspace to output DisplayPort-2
+    bindsym Control+6 workspace 16; [workspace=16] move workspace to output DisplayPort-3
+    bindsym Control+7 workspace 17; [workspace=17] move workspace to output DisplayPort-2
+    bindsym Control+8 workspace 18; [workspace=18] move workspace to output DisplayPort-3
+    bindsym Control+9 workspace 19; [workspace=19] move workspace to output DisplayPort-2
 
     # bindsym Return exec konsole
     bindsym Return exec urxvt
@@ -137,16 +189,28 @@ mode "modal" {
     # change focus between tiling / floating windows
     bindsym f focus mode_toggle
     # why does this need a sleep delay? I don't know
-    bindsym z exec --no-startup-id "zsh -c 'i3-msg mode default; sleep 0.2; loginctl lock-session'"
+    bindsym z exec --no-startup-id "i3lock -i /home/mvilim/Wallpapers/kde5.14.1920+3840.png"; mode "default"
+
+    bindsym space exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
     bindsym b workspace back_and_forth
 
     bindsym d exec dmenu_run
     bindcode 133 mode "move"
     bindcode 134 mode "move"
+    bindsym m mode "displays"
     bindsym r mode "resize"
     bindsym Shift+r reload
     bindsym Shift+Ctrl+r restart
+}
+
+mode "displays" {
+    bindsym Escape mode "modal"
+
+    bindsym 1 exec bash -c /home/mvilim/repos/dotfiles_mvilim2/i3_desktop/lg.sh
+    bindsym 3 exec bash -c /home/mvilim/repos/dotfiles_mvilim2/i3_desktop/asus.sh
+    bindsym 5 exec bash -c /home/mvilim/repos/dotfiles_mvilim2/i3_desktop/asus_and_lg.sh
+
 }
 
 mode "move" {
@@ -200,33 +264,6 @@ mode "resize" {
 
         bindsym Escape mode "modal"
 }
-
-# workspace default monitors
-# set $left_output DVI-D-0
-# set $right_output DP-4
-set $left_output Virtual1
-set $right_output Virtual2
-
-workspace 0 output Virtual2
-workspace 1 output Virtual1
-workspace 2 output Virtual2
-workspace 3 output Virtual1
-workspace 4 output Virtual2
-workspace 5 output Virtual1
-workspace 6 output Virtual2
-workspace 7 output Virtual1
-workspace 8 output Virtual2
-workspace 9 output Virtual1
-workspace 10 output Virtual2
-workspace 11 output Virtual1
-workspace 12 output Virtual2
-workspace 13 output Virtual1
-workspace 14 output Virtual2
-workspace 15 output Virtual1
-workspace 16 output Virtual2
-workspace 17 output Virtual1
-workspace 18 output Virtual2
-workspace 19 output Virtual1
 
 # Starting things with i3
 for_window [class="yakuake"] floating enable;
