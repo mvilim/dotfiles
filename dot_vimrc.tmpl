@@ -39,6 +39,7 @@ Plug 'lukhio/vim-mapping-conflicts'
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mattn/getsid-vim'
+Plug 'kana/vim-submode'
 
 call plug#end()
 
@@ -216,6 +217,17 @@ xmap <silent> <leader>lav <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>lac <Plug>(coc-codeaction-cursor)
 nmap <silent> <leader>laa <Plug>(coc-codeaction
 nmap <silent> <leader>lar <Plug>(coc-rename)
+vmap <silent> <leader>lvs <Plug>(coc-range-select)
+nmap <silent> <leader>lvs <Plug>(coc-range-select)
+
+" range select
+nnoremap <Plug>(visual-mode) :normal v<CR>
+call submode#enter_with('edit', 'v', '', '<BS>', '<Nop>')
+call submode#enter_with('edit', 'n', 'r', '<BS>', '<Plug>(visual-mode)')
+call submode#map('edit', 'v', 'r', 'e', '<Plug>(call-coc-range-select)')
+let g:submode_timeout = 0
+
+vnoremap <Plug>(call-coc-range-select) :<C-u>call CocAction('rangeSelect', visualmode(), v:true)<CR>
 
 nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
 
