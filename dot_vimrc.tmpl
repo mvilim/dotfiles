@@ -13,7 +13,7 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rhysd/vim-clang-format'
 Plug 'Shougo/vimproc.vim' " required by vim vebugger
-Plug 'idanarye/vim-vebugger'
+" Plug 'idanarye/vim-vebugger'
 Plug 'puremourning/vimspector'
 Plug 'beeender/Comrade'
 
@@ -56,9 +56,9 @@ let g:lightline = {
 set tags=./tags;
 
 " vebugger settings
-let g:vebugger_leader='<space>d'
-nnoremap <space>ddi :VBGrawWrite info locals<enter>
-nnoremap <space>ddb :VBGrawWrite backtrace<enter>
+" let g:vebugger_leader='<space>d'
+" nnoremap <space>ddi :VBGrawWrite info locals<enter>
+" nnoremap <space>ddb :VBGrawWrite backtrace<enter>
 
 " Remove delay for key code timeouts
 set timeoutlen=10000 ttimeoutlen=0
@@ -275,6 +275,15 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" vimspector mappings
+" let g:vimspector_enable_mappings = 'HUMAN'
+nmap <silent> <leader>dc <Plug>VimspectorContinue
+nmap <silent> <leader>dr <Plug>VimpectorRestart
+nmap <silent> <leader>db <Plug>VimspectorToggleBreakpoint
+nmap <silent> <leader>do :VimspectorReset<CR>
+nmap <silent> <leader>de <Plug>VimspectorBalloonEval
+xmap <silent> <leader>de <Plug>VimspectorBalloonEval
 
 " locationlist mappings
 nnoremap <silent> <leader>ll :lop<CR>
@@ -497,9 +506,6 @@ hi Visual ctermbg=239
 
 " tex preview
 let g:livepreview_cursorhold_recompile = 0
-
-let g:vimspector_enable_mappings = 'HUMAN'
-" packadd! vimspector
 
 " close buffer without closing window
 command Bd bp\|bd \#
