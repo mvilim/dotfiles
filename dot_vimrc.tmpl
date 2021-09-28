@@ -162,7 +162,7 @@ endfun
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=238
 match ExtraWhitespace /\s\+\%#\@<!$/
-"Remove all trailing whitespace by pressing F5
+" remove all trailing whitespace
 nnoremap <leader>cw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " custom colors
@@ -306,18 +306,18 @@ nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>fw :Windows<CR>
 nnoremap <silent> <leader>fh :History<CR>
-nnoremap <silent> <leader>fl :BLines<CR>
+nnoremap <silent> <leader>fl :Rgb<CR>
 nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
-nnoremap <silent> <leader>fxrh :Rgxrh<CR>
 nnoremap <silent> <leader>fi :Rgi<CR>
 " See https://stackoverflow.com/questions/13830874/why-do-some-vim-mappings-include-c-u-after-a-colon
-" <C-U> (Ctrl-U) clears the visual selection from the prompt :
+" <C-U> (Ctrl-U) clears the visual selection from the prompt
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
 
-" ignore filename in ripgrep
-let s:rg = 'rg --column --line-number --no-heading --color=always --smart-case --hidden --glob "!**/.git/**" '
+let s:rg_base = 'rg --column --line-number --no-heading --color=always --smart-case --hidden'
+let s:rgg = s:rg_base.' --glob "!**/.git/**" '
+" ignore filename for ripgrep
 let s:fzf_options = '--delimiter : --nth 4..'
 function s:make_fzf_query_options(query)
   return s:fzf_options . ' -q ' . query
@@ -329,10 +329,11 @@ endfunction
 
 let s:fzf_options_dict = s:make_fzf_options_dict(s:fzf_options)
 
-command! -bang -nargs=* Rg call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:fzf_options_dict, <bang>0)
-command! -bang -nargs=* Rgxh call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:fzf_options_dict, <bang>0)
-command! -bang -nargs=* Rgi call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.shellescape(expand('<cword>'))), <bang>0)
-command! -bang -nargs=* Rgv call fzf#vim#grep(s:rg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.s:get_visual_selection())), <bang>0)
+" see https://github.com/junegunn/fzf.vim/issues/374 for similar scripts
+command! -bang -nargs=* Rg call fzf#vim#grep(s:rgg.shellescape(<q-args>).'', 1, s:fzf_options_dict, <bang>0)
+command! -bang -nargs=* Rgb call fzf#vim#grep(s:rg_base . ' --with-filename ' . shellescape(<q-args>) . ' ' . fnameescape(expand('%')), 1, s:fzf_options_dict, <bang>0)
+command! -bang -nargs=* Rgi call fzf#vim#grep(s:rgg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.shellescape(expand('<cword>'))), <bang>0)
+command! -bang -nargs=* Rgv call fzf#vim#grep(s:rgg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.s:get_visual_selection())), <bang>0)
 
 " from https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
 function! s:get_visual_selection()
