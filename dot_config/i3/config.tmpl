@@ -90,47 +90,50 @@ for_window [class="smplayer"] floating disable
 exec_always --no-startup-id ~/.fehbg
 exec_always pulseeffects --gapplication-service
 
-workspace 0 output DisplayPort-3
-workspace 1 output DisplayPort-2
-workspace 2 output DisplayPort-3
-workspace 3 output DisplayPort-2
-workspace 4 output DisplayPort-3
-workspace 5 output DisplayPort-2
-workspace 6 output DisplayPort-3
-workspace 7 output DisplayPort-2
-workspace 8 output DisplayPort-3
-workspace 9 output DisplayPort-2
-workspace 10 output DisplayPort-3
-workspace 11 output DisplayPort-2
-workspace 12 output DisplayPort-3
-workspace 13 output DisplayPort-2
-workspace 14 output DisplayPort-3
-workspace 15 output DisplayPort-2
-workspace 16 output DisplayPort-3
-workspace 17 output DisplayPort-2
-workspace 18 output DisplayPort-3
-workspace 19 output DisplayPort-2
+set $left_output HDMI-0
+set $right_output DP-1
 
-exec_always i3-msg [workspace=0] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=1] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=2] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=3] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=4] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=5] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=6] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=7] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=8] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=9] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=10] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=11] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=12] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=13] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=14] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=15] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=16] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=17] move workspace to output DisplayPort-2
-exec_always i3-msg [workspace=18] move workspace to output DisplayPort-3
-exec_always i3-msg [workspace=19] move workspace to output DisplayPort-2
+workspace 0 output $right_output
+workspace 1 output $left_output
+workspace 2 output $right_output
+workspace 3 output $left_output
+workspace 4 output $right_output
+workspace 5 output $left_output
+workspace 6 output $right_output
+workspace 7 output $left_output
+workspace 8 output $right_output
+workspace 9 output $left_output
+workspace 10 output $right_output
+workspace 11 output $left_output
+workspace 12 output $right_output
+workspace 13 output $left_output
+workspace 14 output $right_output
+workspace 15 output $left_output
+workspace 16 output $right_output
+workspace 17 output $left_output
+workspace 18 output $right_output
+workspace 19 output $left_output
+
+exec_always i3-msg [workspace=0] move workspace to output $right_output
+exec_always i3-msg [workspace=1] move workspace to output $left_output
+exec_always i3-msg [workspace=2] move workspace to output $right_output
+exec_always i3-msg [workspace=3] move workspace to output $left_output
+exec_always i3-msg [workspace=4] move workspace to output $right_output
+exec_always i3-msg [workspace=5] move workspace to output $left_output
+exec_always i3-msg [workspace=6] move workspace to output $right_output
+exec_always i3-msg [workspace=7] move workspace to output $left_output
+exec_always i3-msg [workspace=8] move workspace to output $right_output
+exec_always i3-msg [workspace=9] move workspace to output $left_output
+exec_always i3-msg [workspace=10] move workspace to output $right_output
+exec_always i3-msg [workspace=11] move workspace to output $left_output
+exec_always i3-msg [workspace=12] move workspace to output $right_output
+exec_always i3-msg [workspace=13] move workspace to output $left_output
+exec_always i3-msg [workspace=14] move workspace to output $right_output
+exec_always i3-msg [workspace=15] move workspace to output $left_output
+exec_always i3-msg [workspace=16] move workspace to output $right_output
+exec_always i3-msg [workspace=17] move workspace to output $left_output
+exec_always i3-msg [workspace=18] move workspace to output $right_output
+exec_always i3-msg [workspace=19] move workspace to output $left_output
 
 mode "modal" {
     bindsym Escape mode "default"
@@ -158,26 +161,26 @@ mode "modal" {
     # removed automatic move, rely on exec_always move
     # bindsym X workspace X; [workspace=X] move workspace to output [OUTPUT]
 
-    bindsym 0 workspace 0; [workspace=0] move workspace to output DisplayPort-3
-    bindsym 1 workspace 1; [workspace=1] move workspace to output DisplayPort-2
-    bindsym 2 workspace 2; [workspace=2] move workspace to output DisplayPort-3
-    bindsym 3 workspace 3; [workspace=3] move workspace to output DisplayPort-2
-    bindsym 4 workspace 4; [workspace=4] move workspace to output DisplayPort-3
-    bindsym 5 workspace 5; [workspace=5] move workspace to output DisplayPort-2
-    bindsym 6 workspace 6; [workspace=6] move workspace to output DisplayPort-3
-    bindsym 7 workspace 7; [workspace=7] move workspace to output DisplayPort-2
-    bindsym 8 workspace 8; [workspace=8] move workspace to output DisplayPort-3
-    bindsym 9 workspace 9; [workspace=9] move workspace to output DisplayPort-2
-    bindsym Control+0 workspace 10; [workspace=10] move workspace to output DisplayPort-3
-    bindsym Control+1 workspace 11; [workspace=11] move workspace to output DisplayPort-2
-    bindsym Control+2 workspace 12; [workspace=12] move workspace to output DisplayPort-3
-    bindsym Control+3 workspace 13; [workspace=13] move workspace to output DisplayPort-2
-    bindsym Control+4 workspace 14; [workspace=14] move workspace to output DisplayPort-3
-    bindsym Control+5 workspace 15; [workspace=15] move workspace to output DisplayPort-2
-    bindsym Control+6 workspace 16; [workspace=16] move workspace to output DisplayPort-3
-    bindsym Control+7 workspace 17; [workspace=17] move workspace to output DisplayPort-2
-    bindsym Control+8 workspace 18; [workspace=18] move workspace to output DisplayPort-3
-    bindsym Control+9 workspace 19; [workspace=19] move workspace to output DisplayPort-2
+    bindsym 0 workspace 0; [workspace=0] move workspace to output $right_output
+    bindsym 1 workspace 1; [workspace=1] move workspace to output $left_output
+    bindsym 2 workspace 2; [workspace=2] move workspace to output $right_output
+    bindsym 3 workspace 3; [workspace=3] move workspace to output $left_output
+    bindsym 4 workspace 4; [workspace=4] move workspace to output $right_output
+    bindsym 5 workspace 5; [workspace=5] move workspace to output $left_output
+    bindsym 6 workspace 6; [workspace=6] move workspace to output $right_output
+    bindsym 7 workspace 7; [workspace=7] move workspace to output $left_output
+    bindsym 8 workspace 8; [workspace=8] move workspace to output $right_output
+    bindsym 9 workspace 9; [workspace=9] move workspace to output $left_output
+    bindsym Control+0 workspace 10; [workspace=10] move workspace to output $right_output
+    bindsym Control+1 workspace 11; [workspace=11] move workspace to output $left_output
+    bindsym Control+2 workspace 12; [workspace=12] move workspace to output $right_output
+    bindsym Control+3 workspace 13; [workspace=13] move workspace to output $left_output
+    bindsym Control+4 workspace 14; [workspace=14] move workspace to output $right_output
+    bindsym Control+5 workspace 15; [workspace=15] move workspace to output $left_output
+    bindsym Control+6 workspace 16; [workspace=16] move workspace to output $right_output
+    bindsym Control+7 workspace 17; [workspace=17] move workspace to output $left_output
+    bindsym Control+8 workspace 18; [workspace=18] move workspace to output $right_output
+    bindsym Control+9 workspace 19; [workspace=19] move workspace to output $left_output
 
     # bindsym Return exec konsole
     bindsym Return exec urxvt
