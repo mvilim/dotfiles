@@ -511,6 +511,8 @@ let g:livepreview_cursorhold_recompile = 0
 " close buffer without closing window
 command Bd bp\|bd \#
 
+command CloseAllBuffers bufdo bwipeout
+
 {{ if .has_local_templates -}}
 {{ template "local/dot_vimrc" -}}
 {{ end -}}
