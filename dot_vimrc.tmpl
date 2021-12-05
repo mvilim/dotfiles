@@ -362,7 +362,18 @@ let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
 
 " NERDTree mappings
-nnoremap <silent> <leader>t :NERDTreeToggle<CR>
+" TODO make this specific to project type
+let NERDTreeIgnore=['^target$[[dir]]']
+" would probably be better if the existing window was used for browsing
+" instead of using a new one (see vinegar)
+nnoremap <silent> <leader>t :call NERDTreeCustom()<CR>
+function! NERDTreeCustom()
+  if g:NERDTree.ExistsForBuf()
+    exe 'NERDTreeClose'
+  else
+    exe 'NERDTreeFocus'
+  endif
+endfunc
 
 " window navigation mappings
 nnoremap <silent> <leader>wh <C-w>h
