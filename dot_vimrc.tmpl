@@ -170,7 +170,9 @@ hi MatchParen ctermbg=black ctermfg=white
 highlight! link SignColumn LineNr
 
 " make ro buffers noma
-autocmd BufRead * let &l:modifiable = !&readonly
+" exlclude vim fugitive buffers, as making this breaks them (though they are
+" already unmodifiable, not sure what the difference is)
+autocmd BufRead *\(.fugitive*\)\@<! let &l:modifiable = !&readonly
 
 " should use vim autoformat to pull in clangformat
 " clang format mappings
