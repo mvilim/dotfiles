@@ -460,6 +460,10 @@ autocmd FileType vimwiki RainbowToggleOff
 " let g:vimwiki_syntax_variables['markdown']['rxEqIn'] = '\$\$[^$`]\+\$\$'
 " let g:vimwiki_syntax_variables['markdown']['char_eqin'] = '\$\$'
 
+" indent searching
+nnoremap <Leader>[N :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' . line('.') . 'l\S', 'be')<CR>
+nnoremap <Leader>[n :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
+
 " fold config
 set foldmethod=indent
 set foldnestmax=10
