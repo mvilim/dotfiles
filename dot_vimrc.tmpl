@@ -352,7 +352,7 @@ function! s:get_visual_selection()
 endfunction
 
 " use fd as fzf find command
-let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude "**/.git/"'
+let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude "**/.git/" --strip-cwd-prefix'
 " we would prefer first matching filenames (with a priority of length) and
 " then match directories with a lower priority, but this is apparently not
 " possible, so we choose to just match filenames

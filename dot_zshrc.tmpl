@@ -131,8 +131,8 @@ function detach { nohup "$1" > /dev/null&; }
 # then match directories with a lower priority, but this is apparently not
 # possible, so we choose to just match filenames
 export FZF_DEFAULT_OPTS="--delimiter=/ --nth=-1,.. --tiebreak=end"
-export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_CTRL_T_COMMAND="fd"
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix"
+export FZF_CTRL_T_COMMAND="fd --strip-cwd-prefix"
 
 export KEYTIMEOUT=1
 export EDITOR=/usr/bin/nvim
