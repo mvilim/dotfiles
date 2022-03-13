@@ -42,7 +42,9 @@ Plug 'lukhio/vim-mapping-conflicts'
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mattn/getsid-vim'
+" https://github.com/kana/vim-submode/blob/master/doc/submode.txt
 Plug 'kana/vim-submode'
+Plug 'vim-scripts/SyntaxAttr.vim'
 
 call plug#end()
 
@@ -153,6 +155,8 @@ if has('nvim')
   endfunction
 endif
 
+nnoremap <leader>iha :call SyntaxAttr()<CR>
+
 " for debugging highlighting
 " https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
 nnoremap <leader>ihs :call SynStack()<CR>
@@ -234,6 +238,8 @@ nmap <silent> <leader>lvs <Plug>(coc-range-select)
 nnoremap <Plug>(visual-mode) :normal v<CR>
 call submode#enter_with('edit', 'v', '', '<BS>', '<Nop>')
 call submode#enter_with('edit', 'n', 'r', '<BS>', '<Plug>(visual-mode)')
+" TODO use x option to leave both visual and edit mode
+" TODO only enter visual mode when range select is used)
 call submode#map('edit', 'v', 'r', 'e', '<Plug>(call-coc-range-select)')
 let g:submode_timeout = 0
 
@@ -288,12 +294,34 @@ endfunction
 
 " vimspector mappings
 " let g:vimspector_enable_mappings = 'HUMAN'
+" TODO add mappings for navigating between the windows
 nmap <silent> <leader>dc <Plug>VimspectorContinue
-nmap <silent> <leader>dr <Plug>VimpectorRestart
+nmap <silent> <leader>dl <Plug>VimspectorLaunch
+nmap <silent> <leader>dt <Plug>VimspectorStop
+nmap <silent> <leader>dr <Plug>VimspectorRestart
+nmap <silent> <leader>dp <Plug>VimspectorPause
 nmap <silent> <leader>db <Plug>VimspectorToggleBreakpoint
+nmap <silent> <leader>dv <Plug>VimspectorToggleConditionalBreakpoint
+nmap <silent> <leader>df <Plug>VimspectorAddFunctionBreakpoint
 nmap <silent> <leader>do :VimspectorReset<CR>
+nmap <silent> <leader>dsv <Plug>VimspectorStepOver
+nmap <silent> <leader>dsi <Plug>VimspectorStepInto
+nmap <silent> <leader>dso <Plug>VimspectorStepOut
+nmap <silent> <leader>dsc <Plug>VimspectorRunToCursor
+nmap <silent> <leader>dfk <Plug>VimspectorUpFrame
+nmap <silent> <leader>dfj <Plug>VimspectorDownFrame
 nmap <silent> <leader>de <Plug>VimspectorBalloonEval
-xmap <silent> <leader>de <Plug>VimspectorBalloonEval
+nmap <silent> <leader>dwb <Plug>VimspectorBreakpoints
+
+" TODO a more advanced submode plugin would be needed for these sort of
+" mappings, since we would want to supplement the existing navigational
+" mappings rather than replace them
+" note that a empty { lhs } in the enter_with command will cause the mode to
+" immediately be left
+" call submode#enter_with('debug', 'n', '', '<leader>d')
+" call submode#leave_with('debug', 'n', '', '<Esc>')
+" call submode#map('debug', 'n', 'r', 'c', '<Plug>VimspectorContinue')
+" call submode#map('debug', 'n', 'r', '<space>', '<Plug>VimspectorToggleBreakpoint')
 
 " locationlist mappings
 nnoremap <silent> <leader>ll :lop<CR>
@@ -324,9 +352,14 @@ nnoremap <silent> <leader>fi :Rgi<CR>
 " See https://stackoverflow.com/questions/13830874/why-do-some-vim-mappings-include-c-u-after-a-colon
 " <C-U> (Ctrl-U) clears the visual selection from the prompt
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
+nnoremap <silent> <leader>fn :<C-U>Rgnc<CR>
 
 let s:rg_base = 'rg --column --line-number --no-heading --color=always --smart-case --hidden'
 let s:rgg = s:rg_base.' --glob "!**/.git/**" '
+" TODO the problem here is that we need to apply this to the fzf search, not
+" the rg search (e.g. we don't want to ignore all lines with a comment, just
+" matches that are in a comment)
+let s:rgnc = s:rg_base.' -v "^\s*//"'
 " ignore filename for ripgrep
 let s:fzf_options = '--delimiter : --nth 4..'
 function s:make_fzf_query_options(query)
@@ -341,6 +374,7 @@ let s:fzf_options_dict = s:make_fzf_options_dict(s:fzf_options)
 
 " see https://github.com/junegunn/fzf.vim/issues/374 for similar scripts
 command! -bang -nargs=* Rg call fzf#vim#grep(s:rgg.shellescape(<q-args>).'', 1, s:fzf_options_dict, <bang>0)
+command! -bang -nargs=* Rgnc call fzf#vim#grep(s:rgnc.shellescape(<q-args>).'', 1, s:fzf_options_dict, <bang>0)
 command! -bang -nargs=* Rgb call fzf#vim#grep(s:rg_base . ' --with-filename ' . shellescape(<q-args>) . ' ' . fnameescape(expand('%')), 1, s:fzf_options_dict, <bang>0)
 command! -bang -nargs=* Rgi call fzf#vim#grep(s:rgg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.shellescape(expand('<cword>'))), <bang>0)
 command! -bang -nargs=* Rgv call fzf#vim#grep(s:rgg.shellescape(<q-args>), 1, s:make_fzf_options_dict(' -q '.s:get_visual_selection())), <bang>0)
