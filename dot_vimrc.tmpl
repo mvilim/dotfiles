@@ -296,7 +296,8 @@ endfunction
 " let g:vimspector_enable_mappings = 'HUMAN'
 " TODO add mappings for navigating between the windows
 nmap <silent> <leader>dc <Plug>VimspectorContinue
-nmap <silent> <leader>dl <Plug>VimspectorLaunch
+" nmap <silent> <leader>dl <Plug>VimspectorLaunch
+nmap <silent> <leader>dl :call VimspectorLaunchContext()<CR>
 nmap <silent> <leader>dt <Plug>VimspectorStop
 nmap <silent> <leader>dr <Plug>VimspectorRestart
 nmap <silent> <leader>dp <Plug>VimspectorPause
@@ -322,6 +323,25 @@ nmap <silent> <leader>dwb <Plug>VimspectorBreakpoints
 " call submode#leave_with('debug', 'n', '', '<Esc>')
 " call submode#map('debug', 'n', 'r', 'c', '<Plug>VimspectorContinue')
 " call submode#map('debug', 'n', 'r', '<space>', '<Plug>VimspectorToggleBreakpoint')
+
+function! VimspectorLaunchContext()
+    let path = expand('%:p')
+    let li =  line('.')
+    let co = col('.')
+    let output = split(system("cargo find-executable arg-input" . " --filename " . path . " --line-number " . li . " --column-number " . co), "\n")
+    " TODO validate output count
+    call assert_equal(len(output), 3)
+    let library_path = output[0]
+    let executable_path = output[1]
+    let test_name = output[2]
+    echo library_path
+    echo executable_path
+    echo test_name
+    call vimspector#LaunchWithSettings( #{ configuration: 'test',
+                                         \ library_path: library_path,
+                                         \ executable_path: executable_path,
+                                         \ test_name: test_name } )
+endfunction
 
 " locationlist mappings
 nnoremap <silent> <leader>ll :lop<CR>
