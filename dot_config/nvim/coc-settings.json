@@ -5,7 +5,8 @@
   "rust-analyzer.enableCargoWatchOnStartup": true,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.inlayHints.enable": false,
-  "rust-analyzer.diagnostics.disabled": ["incorrect-ident-case", "unlinked-file"],
+  "rust-analyzer.diagnostics.enableExperimental": false,
+  "rust-analyzer.diagnostics.disabled": ["incorrect-ident-case", "unlinked-file", "inactive-code"],
   "languageserver": {
     "ccls": {
       "command": "ccls",
