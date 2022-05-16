@@ -277,6 +277,9 @@ function s:coc_configure_floating_window() abort
     nmap <buffer> <cr> i<cr>
 endfunction
 
+" disable vimwiki table mappings since they somehow conflict with this <TAB>
+" binding for coc
+let g:vimwiki_table_mappings = 0
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
