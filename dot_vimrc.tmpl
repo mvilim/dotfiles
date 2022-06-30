@@ -372,6 +372,7 @@ nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fa :Ag<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
 nnoremap <silent> <leader>fi :Rgi<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
 " See https://stackoverflow.com/questions/13830874/why-do-some-vim-mappings-include-c-u-after-a-colon
 " <C-U> (Ctrl-U) clears the visual selection from the prompt
 vnoremap <silent> <leader>fv :<C-U>Rgv<CR>
@@ -384,7 +385,7 @@ let s:rgg = s:rg_base.' --glob "!**/.git/**" '
 " matches that are in a comment)
 let s:rgnc = s:rg_base.' -v "^\s*//"'
 " ignore filename for ripgrep
-let s:fzf_options = '--delimiter : --nth 4..'
+let s:fzf_options = '--delimiter : --nth 4.. --keep-right'
 function s:make_fzf_query_options(query)
   return s:fzf_options . ' -q ' . query
 endfunction
@@ -427,6 +428,8 @@ let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
 
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
+
+let g:coc_fzf_opts = ['--delimiter', ':', '--nth', '4..', '--keep-right']
 
 " NERDTree mappings
 " TODO make this specific to project type
