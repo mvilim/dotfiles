@@ -246,6 +246,7 @@ let g:submode_timeout = 0
 vnoremap <Plug>(call-coc-range-select) :<C-u>call CocAction('rangeSelect', visualmode(), v:true)<CR>
 
 nnoremap <silent> <leader>ls :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>lw :call <SID>show_signature()<CR>
 
 nnoremap <silent> <leader>lfd :CocFzfList diagnostics<cr>
 nnoremap <silent> <leader>lfs :CocFzfList symbols<cr>
@@ -260,6 +261,19 @@ function! s:show_documentation()
   else
     call CocAction('doHover')
   endif
+endfunction
+
+function! s:show_signature()
+  " move the cursor forward so that toggling this help won't move the cursor
+  " backward
+  normal! l
+  " unfortunately this command only seems to work in insert mode; coc
+  " debugging is required to understand why
+  startinsert
+  call CocActionAsync('showSignatureHelp')
+  " we can't stop insert here since the floatingwindow will be automatically
+  " closed; perhaps there is a way to pin it in coc
+  " stopinsert
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
