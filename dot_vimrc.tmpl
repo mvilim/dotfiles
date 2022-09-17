@@ -439,13 +439,17 @@ let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude "**/.git/" --strip-cw
 
 " this should only be set for file completions -- it breaks things like
 " looking for string matches in the current file
-let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --tiebreak=end"
+let $FZF_DEFAULT_OPTS = "--delimiter=/ --nth=-1,.. --hscroll-off=1000 --tiebreak=end"
 
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
 
-" need to have different settings for e.g. symbols
+" need to have different settings for e.g. symbols (--keep-right for things
+" like find references which have the file on the left, but not for things
+" where the file is on the right; likely need a function which temporarily
+" sets the options for each call
 " let g:coc_fzf_opts = ['--delimiter', ':', '--nth', '4..', '--keep-right']
+let g:coc_fzf_opts = ['--hscroll-off=1000']
 
 " NERDTree mappings
 " TODO make this specific to project type
