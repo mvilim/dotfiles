@@ -7,6 +7,7 @@
   "rust-analyzer.inlayHints.enable": false,
   "rust-analyzer.diagnostics.enableExperimental": false,
   "rust-analyzer.diagnostics.disabled": ["incorrect-ident-case", "unlinked-file", "inactive-code"],
+  "suggest.languageSourcePriority": 99,
   "languageserver": {
     "ccls": {
       "command": "ccls",
