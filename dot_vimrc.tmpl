@@ -107,7 +107,7 @@ nnoremap $ $l
 
 " Set line under cursor
 set cursorline
-hi CursorLine term=underline cterm=NONE gui=NONE ctermbg=236
+hi CursorLine term=underline cterm=NONE gui=NONE ctermbg=237
 hi CursorLineNr term=underline cterm=NONE gui=NONE ctermbg=NONE
 
 " Warn on search wrap
@@ -509,7 +509,6 @@ let g:cpp_class_decl_highlight = 1
 nmap <Leader>wn <Plug>VimwikiNextLink
 nmap <Leader>wp <Plug>VimwikiPrevLink
 let g:vimwiki_folding='expr'
-hi Folded ctermbg=23
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
                   \ '.mkd': 'markdown',
                   \ '.wiki': 'media'}
@@ -556,6 +555,8 @@ nnoremap <Leader>[N :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%<' 
 nnoremap <Leader>[n :call search('^'. matchstr(getline('.'), '\(^\s*\)') .'\%>' . line('.') . 'l\S', 'e')<CR>
 
 " fold config
+hi Folded ctermbg=236 ctermfg=None
+" hi link Folded Normal
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
