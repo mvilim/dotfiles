@@ -45,6 +45,8 @@ Plug 'mattn/getsid-vim'
 " https://github.com/kana/vim-submode/blob/master/doc/submode.txt
 Plug 'kana/vim-submode'
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'jeetsukumaran/vim-indentwise'
+Plug 'arecarn/vim-fold-cycle'
 
 call plug#end()
 
@@ -570,6 +572,11 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+" fold cycle
+let g:fold_cycle_default_mapping = 0 "disable default mappings
+nmap <Leader>zo <Plug>(fold-cycle-open)
+nmap <Leader>zc <Plug>(fold-cycle-close)
 
 " code execution keys
 map <Leader>ee <Plug>(IPy-Run)
