@@ -181,7 +181,6 @@ nnoremap <leader>cw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " custom colors
 hi MatchParen ctermbg=black ctermfg=white
 highlight! link SignColumn LineNr
-hi Pmenu ctermbg=238 ctermfg=white
 
 " make ro buffers noma
 " exlclude vim fugitive buffers, as making this breaks them (though they are
@@ -206,13 +205,23 @@ let g:coc_global_extensions = [
        \  'coc-tsserver',
        \ ]
 
-highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
-highlight CocWarningHighlight ctermbg=52 guifg=#5f0000
-highlight CocHintSign ctermfg=240
-" since I don't use nvim through a GUI, this has no impact besides disabling
-" the default highlight; for some reason term=NONE does not work unless issued
-" after startup
+" these do not have an effect unless run after coc highlights load
+" highlight CocUnusedHighlight ctermbg=None
+" highlight CocHintHighlight ctermbg=None
+" but an autocmd can be used to adjust them
+" autocmd FileType rust highlight CocUnusedHighlight ctermbg=None
+" autocmd FileType rust highlight CocHintHighlight ctermbg=None
+" alternatively an unused setting (gui) can be used
 highlight CocHintHighlight guifg=#FFFFFF
+highlight CocHintSign ctermfg=240
+highlight Pmenu ctermbg=238 ctermfg=white
+highlight CocErrorHighlight ctermbg=52 guifg=#5f0000
+highlight CocWarningHighlight ctermbg=208 guifg=#5f0000
+highlight CocFloating ctermbg=238 ctermfg=255
+highlight CocPumDetail ctermfg=250
+highlight CocPumMenu ctermfg=250
+highlight CocPumShortcut ctermfg=250
+highlight CocPumSearch ctermfg=245
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
